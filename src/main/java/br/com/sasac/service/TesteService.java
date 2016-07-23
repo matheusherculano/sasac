@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.sasac.repositories;
+package br.com.sasac.service;
 
-import br.com.sasac.models.Teste;
+import br.com.sasac.model.Teste;
 import java.io.Serializable;
 import org.springframework.data.repository.CrudRepository;
 
@@ -13,6 +13,6 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Matheus
  */
-public interface TesteRepository extends CrudRepository<Teste, Long>{
+public interface TesteService extends CrudRepository<Teste, Long>{
     
 }

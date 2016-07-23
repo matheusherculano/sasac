@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.sasac.controllers;
+package br.com.sasac.controller;
 
-import br.com.sasac.models.Teste;
+import br.com.sasac.model.Teste;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;

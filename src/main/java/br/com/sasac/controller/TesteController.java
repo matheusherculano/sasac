@@ -1,6 +1,6 @@
-package br.com.sasac.controllers;
+package br.com.sasac.controller;
 
-import br.com.sasac.models.Teste;
+import br.com.sasac.model.Teste;
 import javax.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
