@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
- * @author Matheus
+ * @author Matheus Herculano
  */
 public class CustomController<T, D extends CrudRepository<T, Long>> {
  
