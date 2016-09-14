@@ -37,7 +37,9 @@ public class UsuarioSasac {
     
 //    @ManyToMany
 //	@JoinTable(name="avaliacao_usuario", joinColumns={@JoinColumn(name="id_avaliacao")}, inverseJoinColumns={@JoinColumn(name="id_usuario")})
-//    private Iterable<Avaliacao> usuariosResponderam;
+    @ManyToMany
+    @JoinTable(name="usuario_avaliacao", joinColumns={@JoinColumn(name="usuario_id")}, inverseJoinColumns={@JoinColumn(name="avaliacao_id")})
+    private List<Avaliacao> usuariosResponderam;
     
 
     public UsuarioSasac() {
