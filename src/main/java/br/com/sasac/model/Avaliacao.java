@@ -1,25 +1,13 @@
 package br.com.sasac.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
-import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,6 +25,19 @@ public class Avaliacao {
     @Column(name = "id")
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private UsuarioSasac usuarioCriador;
+//    
+//     @OneToMany
+//    private List<Periodo> periodo;
+     
+//       @ManyToMany(fetch = FetchType.LAZY)
+//    @JsonBackReference
+//    @JoinTable(name="avaliacao_repeticao", joinColumns={@JoinColumn(name="avaliacao_id")}, inverseJoinColumns={@JoinColumn(name="repeticao_id")})
+//    private List<Repeticao> avaliacao_repeticao;
+     
+     
     @Column(name = "titulo", nullable = false)
     private String titulo;
 
@@ -51,20 +52,19 @@ public class Avaliacao {
     @Column(name = "publicado")
     private boolean publicado;
     
-    
-    @ManyToOne
-    private UsuarioSasac usuarioCriador;
-    
-     @OneToMany
-    private List<Periodo> periodo;
-    
-
     public Avaliacao() {
     }
 
+    public UsuarioSasac getUsuarioCriador() {
+        return usuarioCriador;
+    }
+
+    public void setUsuarioCriador(UsuarioSasac usuarioCriador) {
+        this.usuarioCriador = usuarioCriador;
+    }
 
     
-
+    
     public Long getId() {
         return id;
     }
@@ -99,13 +99,6 @@ public class Avaliacao {
     }
 
 
-    public UsuarioSasac getUsuarioCriador() {
-        return usuarioCriador;
-    }
-
-    public void setUsuarioCriador(UsuarioSasac usuarioCriador) {
-        this.usuarioCriador = usuarioCriador;
-    }
 
     public Date getDt_disponibilidade() {
         return dt_disponibilidade;

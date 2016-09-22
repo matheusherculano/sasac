@@ -1,41 +1,30 @@
 package br.com.sasac.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
- * @author Matheus Herculano
+ * @author ra21501871
  */
 @Entity
-@Table(name = "periodo")
-public class Periodo {
-
+@Table(name = "respostas")
+public class Respostas {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "dt_publicacao")
-    @Temporal(TemporalType.DATE)
-    private Date dt_publicacao;
-
-    @ManyToOne
-    @JoinColumn(name = "avaliacao_id")
-    @JsonIgnore
-    private Avaliacao avaliacao;
     
-     @Column(name = "respostas_positivas")
+    @OneToOne
+    private Periodo periodo;
+    
+    @Column(name = "respostas_positivas")
     private int respostasPositivas;
 
     @Column(name = "respostas_neutras")
@@ -43,6 +32,26 @@ public class Periodo {
 
     @Column(name = "respostas_negativas")
     private int respostasNegativas;
+
+    public Respostas() {
+    }
+
+    public Periodo getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(Periodo periodo) {
+        this.periodo = periodo;
+    }
+
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public int getRespostasPositivas() {
         return respostasPositivas;
@@ -68,32 +77,5 @@ public class Periodo {
         this.respostasNegativas = respostasNegativas;
     }
     
-    public Periodo() {
-    }
-
     
-    public Long getId() {
-        return id;
-    }
-    
-     public Avaliacao getAvaliacao() {
-        return avaliacao;
-    }
-
-    public void setAvaliacao(Avaliacao avaliacao) {
-        this.avaliacao = avaliacao;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getDt_publicacao() {
-        return dt_publicacao;
-    }
-
-    public void setDt_publicacao(Date dt_publicacao) {
-        this.dt_publicacao = dt_publicacao;
-    }
-
 }

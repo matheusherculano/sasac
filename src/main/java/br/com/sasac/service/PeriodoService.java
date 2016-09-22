@@ -5,14 +5,13 @@
  */
 package br.com.sasac.service;
 
-import br.com.sasac.model.Teste;
-import java.io.Serializable;
+import br.com.sasac.model.Periodo;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  *
- * @author Matheus
+ * @author ra21501871
  */
-public interface TesteService extends CrudRepository<Teste, Long>{
+public interface PeriodoService extends CrudRepository<Periodo, Long> {
     
 }

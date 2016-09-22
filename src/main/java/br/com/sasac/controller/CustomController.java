@@ -5,8 +5,6 @@
  */
 package br.com.sasac.controller;
 
-import br.com.sasac.model.Teste;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
@@ -19,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  *
  * @author Matheus Herculano
+ * @param <T>
+ * @param <D>
  */
 public class CustomController<T, D extends CrudRepository<T, Long>> {
  

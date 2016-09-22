@@ -1,13 +1,16 @@
 package br.com.sasac.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,35 +22,43 @@ public class Perfil {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nome_perfil")
-    private String nomePerfil;
+    @Column(name = "perfil")
+    private String perfil;
+    
+    @OneToMany()
+    @JoinTable(name="Perfil_Usuario", joinColumns={@JoinColumn(name="Perfil_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="Usuario", referencedColumnName="id")})
+    @JsonBackReference
+    private List<UsuarioSasac> usuarios; 
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id")
-//    private Iterable<Usuario> usuarios;
-
+    
     public Perfil() {
     }
 
-    public Perfil(Long id, String nomePerfil) {
-        this.id = id;
-        this.nomePerfil = nomePerfil;
+    public List<UsuarioSasac> getUsuarios() {
+        return usuarios;
     }
 
-    public Long getIdperfil() {
+    public void setUsuarios(List<UsuarioSasac> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setIdperfil(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNomePerfil() {
-        return nomePerfil;
+    public String getPerfil() {
+        return perfil;
     }
 
-    public void setNomePerfil(String nomePerfil) {
-        this.nomePerfil = nomePerfil;
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 
+
+    
 }

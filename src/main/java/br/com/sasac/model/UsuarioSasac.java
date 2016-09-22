@@ -2,6 +2,7 @@ package br.com.sasac.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -32,46 +34,48 @@ public class UsuarioSasac {
     @Column(name = "nome_usuario")
     private String nome;
     
-    @Column(name = "perfil")
-    private String perfil;
+    @ManyToOne
+    @JoinColumn(name = "perfil_id")
+    private Perfil perfil;
     
-    @OneToMany(mappedBy = "usuarioCriador")
-    @JsonBackReference
-    private List<Avaliacao> avaliacaos;
+    @OneToMany
+    @JoinTable(name="usuario_avaliacao", joinColumns={@JoinColumn(name="usuario", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="avaliacao", referencedColumnName="id")})
+    private List<Avaliacao> avaliacoes;
     
-//    @ManyToMany
-//	@JoinTable(name="avaliacao_usuario", joinColumns={@JoinColumn(name="id_avaliacao")}, inverseJoinColumns={@JoinColumn(name="id_usuario")})
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JsonBackReference
-    @JoinTable(name="usuario_avaliacao", joinColumns={@JoinColumn(name="usuario_id")}, inverseJoinColumns={@JoinColumn(name="avaliacao_id")})
-    private List<Avaliacao> usuario_avaliacao;
+//    @OneToMany(mappedBy = "usuarioCriador")
+//    private List<Periodo> periodo;
+    
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JsonBackReference
+//    @JoinTable(name="usuario_avaliacao", joinColumns={@JoinColumn(name="usuario_id")}, inverseJoinColumns={@JoinColumn(name="avaliacao_id")})
+//    private List<Avaliacao> usuario_avaliacao;
     
 
     public UsuarioSasac() {
     }
 
-    public UsuarioSasac(Long id, String nome, String perfil, List<Avaliacao> avaliacaos, List<Avaliacao> usuario_avaliacao) {
-        this.id = id;
-        this.nome = nome;
-        this.perfil = perfil;
-        this.avaliacaos = avaliacaos;
-        this.usuario_avaliacao = usuario_avaliacao;
-    }
 
-    public List<Avaliacao> getUsuario_avaliacao() {
-        return usuario_avaliacao;
-    }
-
-    public void setUsuario_avaliacao(List<Avaliacao> usuario_avaliacao) {
-        this.usuario_avaliacao = usuario_avaliacao;
-    }
-    
-
-    
-    
 
     public String getNome() {
         return nome;
+    }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
+    
+    
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
     public void setNome(String nome) {
@@ -86,21 +90,6 @@ public class UsuarioSasac {
         this.id = id;
     }
 
-    public String getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
-    }
-
-    public List<Avaliacao> getAvaliacaos() {
-        return avaliacaos;
-    }
-
-    public void setAvaliacaos(List<Avaliacao> avaliacaos) {
-        this.avaliacaos = avaliacaos;
-    }
 
 
     
