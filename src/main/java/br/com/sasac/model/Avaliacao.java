@@ -1,13 +1,17 @@
 package br.com.sasac.model;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,12 +29,17 @@ public class Avaliacao {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id")
     private UsuarioSasac usuarioCriador;
 //    
-//     @OneToMany
-//    private List<Periodo> periodo;
+     @OneToMany(fetch = FetchType.EAGER)
+     @JoinTable(name="periodo_avaliacao",  
+                     joinColumns={@JoinColumn(name="avaliacao_id", 
+                      referencedColumnName="id")},  
+                     inverseJoinColumns={@JoinColumn(name="periodo_id", 
+                       referencedColumnName="id")})  
+    private List<Periodo> periodo;
      
 //       @ManyToMany(fetch = FetchType.LAZY)
 //    @JsonBackReference
@@ -61,6 +70,14 @@ public class Avaliacao {
 
     public void setUsuarioCriador(UsuarioSasac usuarioCriador) {
         this.usuarioCriador = usuarioCriador;
+    }
+
+    public List<Periodo> getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(List<Periodo> periodo) {
+        this.periodo = periodo;
     }
 
     

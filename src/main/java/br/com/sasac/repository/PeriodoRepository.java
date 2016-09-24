@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.sasac.service;
+package br.com.sasac.repository;
 
-import br.com.sasac.model.Avaliacao;
+import br.com.sasac.model.Periodo;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author RA21501871
+ * @author ra21501871
  */
-public interface AvaliacaoService extends CrudRepository<Avaliacao, Long>{
+@Repository
+public interface PeriodoRepository extends CrudRepository<Periodo, Long> {
     
 }

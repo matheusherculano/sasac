@@ -1,7 +1,9 @@
 package br.com.sasac.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.Column;
@@ -34,21 +36,14 @@ public class UsuarioSasac {
     @Column(name = "nome_usuario")
     private String nome;
     
+//    @ManyToOne(fetch = FetchType.LAZY) perguntar esse lazy para o professor
     @ManyToOne
     @JoinColumn(name = "perfil_id")
     private Perfil perfil;
     
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER) //perguntar para o professor
     @JoinTable(name="usuario_avaliacao", joinColumns={@JoinColumn(name="usuario", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="avaliacao", referencedColumnName="id")})
     private List<Avaliacao> avaliacoes;
-    
-//    @OneToMany(mappedBy = "usuarioCriador")
-//    private List<Periodo> periodo;
-    
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JsonBackReference
-//    @JoinTable(name="usuario_avaliacao", joinColumns={@JoinColumn(name="usuario_id")}, inverseJoinColumns={@JoinColumn(name="avaliacao_id")})
-//    private List<Avaliacao> usuario_avaliacao;
     
 
     public UsuarioSasac() {
@@ -68,8 +63,7 @@ public class UsuarioSasac {
         this.avaliacoes = avaliacoes;
     }
 
-    
-    
+
     public Perfil getPerfil() {
         return perfil;
     }
