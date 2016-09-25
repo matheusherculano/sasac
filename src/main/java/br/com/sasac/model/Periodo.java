@@ -2,12 +2,14 @@ package br.com.sasac.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -35,6 +37,9 @@ public class Periodo {
     @JsonIgnore
     private Avaliacao avaliacao;
     
+    @ManyToMany(mappedBy="periodo")
+    private List<UsuarioSasac> usuarios;
+    
      @Column(name = "respostas_positivas")
     private int respostasPositivas;
 
@@ -43,6 +48,15 @@ public class Periodo {
 
     @Column(name = "respostas_negativas")
     private int respostasNegativas;
+
+    public List<UsuarioSasac> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<UsuarioSasac> usuarios) {
+        this.usuarios = usuarios;
+    }
+    
 
     public int getRespostasPositivas() {
         return respostasPositivas;

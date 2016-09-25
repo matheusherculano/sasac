@@ -27,29 +27,33 @@ import javax.persistence.Table;
 @Table(name = "usuario")
 public class UsuarioSasac {
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    
+
     @Column(name = "nome_usuario")
     private String nome;
-    
+
 //    @ManyToOne(fetch = FetchType.LAZY) perguntar esse lazy para o professor
     @ManyToOne
     @JoinColumn(name = "perfil_id")
     private Perfil perfil;
-    
+
     @OneToMany(fetch = FetchType.EAGER) //perguntar para o professor
-    @JoinTable(name="usuario_avaliacao", joinColumns={@JoinColumn(name="usuario", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="avaliacao", referencedColumnName="id")})
+    @JoinTable(name = "usuario_avaliacao", joinColumns = {
+        @JoinColumn(name = "usuario", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "avaliacao", referencedColumnName = "id")})
     private List<Avaliacao> avaliacoes;
-    
+
+    @ManyToMany
+    @JoinTable(name = "usuario_periodo", joinColumns = {
+        @JoinColumn(name = "usuario_id")}, inverseJoinColumns = {
+        @JoinColumn(name = "periodo_id")})
+    private List<Periodo> periodo;
 
     public UsuarioSasac() {
     }
-
-
 
     public String getNome() {
         return nome;
@@ -62,7 +66,6 @@ public class UsuarioSasac {
     public void setAvaliacoes(List<Avaliacao> avaliacoes) {
         this.avaliacoes = avaliacoes;
     }
-
 
     public Perfil getPerfil() {
         return perfil;
@@ -84,8 +87,4 @@ public class UsuarioSasac {
         this.id = id;
     }
 
-
-
-    
-    
 }
