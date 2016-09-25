@@ -2,6 +2,7 @@ package br.com.sasac.model;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,11 +44,9 @@ public class Avaliacao {
                        referencedColumnName="id")})  
     private List<Periodo> periodo;
      
-//       @ManyToMany(fetch = FetchType.LAZY)
-//    @JsonBackReference
-//    @JoinTable(name="avaliacao_repeticao", joinColumns={@JoinColumn(name="avaliacao_id")}, inverseJoinColumns={@JoinColumn(name="repeticao_id")})
-//    private List<Repeticao> avaliacao_repeticao;
-     
+     @OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
+     @JoinColumn(name="repeticao_id", nullable=true)
+     private Repeticao repeticao;
      
     @Column(name = "titulo", nullable = false)
     private String titulo;
@@ -72,6 +73,16 @@ public class Avaliacao {
         this.usuarioCriador = usuarioCriador;
     }
 
+    public Repeticao getRepeticao() {
+        return repeticao;
+    }
+
+    public void setRepeticao(Repeticao repeticao) {
+        this.repeticao = repeticao;
+    }
+
+    
+    
     public List<Periodo> getPeriodo() {
         return periodo;
     }
