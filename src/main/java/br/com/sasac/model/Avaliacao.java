@@ -1,5 +1,6 @@
 package br.com.sasac.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -35,13 +36,16 @@ public class Avaliacao {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id")
     private UsuarioSasac usuarioCriador;
-//    
-     @OneToMany(fetch = FetchType.EAGER)
-     @JoinTable(name="periodo_avaliacao",  
-                     joinColumns={@JoinColumn(name="avaliacao_id", 
-                      referencedColumnName="id")},  
-                     inverseJoinColumns={@JoinColumn(name="periodo_id", 
-                       referencedColumnName="id")})  
+    
+    
+//     @OneToMany(fetch = FetchType.EAGER)
+//     @JoinTable(name="periodo_avaliacao",  
+//                     joinColumns={@JoinColumn(name="avaliacao_id", 
+//                      referencedColumnName="id")},  
+//                     inverseJoinColumns={@JoinColumn(name="periodo_id", 
+//                       referencedColumnName="id")})  
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="avaliacao")
+    @JsonManagedReference
     private List<Periodo> periodo;
      
      @ManyToOne

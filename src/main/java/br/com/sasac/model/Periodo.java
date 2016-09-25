@@ -1,5 +1,6 @@
 package br.com.sasac.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +35,7 @@ public class Periodo {
 
     @ManyToOne
     @JoinColumn(name = "avaliacao_id")
-    @JsonIgnore
+    @JsonBackReference
     private Avaliacao avaliacao;
     
     @ManyToMany(mappedBy="periodo")

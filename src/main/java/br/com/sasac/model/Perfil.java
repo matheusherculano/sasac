@@ -26,22 +26,13 @@ public class Perfil {
     @Column(name = "perfil")
     private String perfil;
     
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "perfil",fetch = FetchType.LAZY)
 //    @JoinTable(name="Perfil_Usuario", joinColumns={@JoinColumn(name="Perfil_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="Usuario", referencedColumnName="id")})
-    @JsonBackReference
-    @JoinColumn(name = "id")
+//    @JsonManagedReference(value = "perfil-usuario")
     private List<UsuarioSasac> usuarios; 
 
     
     public Perfil() {
-    }
-
-    public List<UsuarioSasac> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<UsuarioSasac> usuarios) {
-        this.usuarios = usuarios;
     }
 
 
