@@ -44,8 +44,8 @@ public class Avaliacao {
                        referencedColumnName="id")})  
     private List<Periodo> periodo;
      
-     @OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
-     @JoinColumn(name="repeticao_id", nullable=true)
+     @ManyToOne
+    @JoinColumn(name = "repeticao_id")
      private Repeticao repeticao;
      
     @Column(name = "titulo", nullable = false)

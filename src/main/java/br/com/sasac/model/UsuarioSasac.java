@@ -41,9 +41,11 @@ public class UsuarioSasac {
     private Perfil perfil;
 
     @OneToMany(fetch = FetchType.EAGER) //perguntar para o professor
-    @JoinTable(name = "usuario_avaliacao", joinColumns = {
-        @JoinColumn(name = "usuario", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "avaliacao", referencedColumnName = "id")})
+    //esse aqui de baixo é o jeito antigo
+//    @JoinTable(name = "usuario_avaliacao", joinColumns = {
+//        @JoinColumn(name = "usuario", referencedColumnName = "id")}, inverseJoinColumns = {
+//        @JoinColumn(name = "avaliacao", referencedColumnName = "id")})
+//    @JoinColumn(name = "avaliacoes_criadas_usuario")
     private List<Avaliacao> avaliacoes;
 
     @ManyToMany

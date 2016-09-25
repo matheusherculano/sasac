@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,9 +26,10 @@ public class Perfil {
     @Column(name = "perfil")
     private String perfil;
     
-    @OneToMany()
-    @JoinTable(name="Perfil_Usuario", joinColumns={@JoinColumn(name="Perfil_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="Usuario", referencedColumnName="id")})
+    @OneToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name="Perfil_Usuario", joinColumns={@JoinColumn(name="Perfil_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="Usuario", referencedColumnName="id")})
     @JsonBackReference
+    @JoinColumn(name = "id")
     private List<UsuarioSasac> usuarios; 
 
     

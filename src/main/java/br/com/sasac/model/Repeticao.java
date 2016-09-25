@@ -20,7 +20,8 @@ public class Repeticao {
     @Column(name = "id")
     private Long id;
 
-    
+    @Column(name = "repeticao")
+    private String repeticao;
     
     
     
@@ -33,6 +34,14 @@ public class Repeticao {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getRepeticao() {
+        return repeticao;
+    }
+
+    public void setRepeticao(String repeticao) {
+        this.repeticao = repeticao;
     }
     
     
