@@ -5,17 +5,13 @@
  */
 package br.com.sasac.repository;
 
-import br.com.sasac.model.Periodo;
-import br.com.sasac.model.UsuarioSasac;
+import br.com.sasac.model.Repeticao;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author ra21501871
+ * @author RA21501871
  */
-@Repository
-public interface PeriodoRepository extends CrudRepository<Periodo, Long> {
-
+public interface RepeticaoRepository extends CrudRepository<Repeticao, Long> {
     
 }

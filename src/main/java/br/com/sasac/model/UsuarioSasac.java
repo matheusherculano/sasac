@@ -41,11 +41,12 @@ public class UsuarioSasac {
 //        @JoinColumn(name = "usuario", referencedColumnName = "id")}, inverseJoinColumns = {
 //        @JoinColumn(name = "avaliacao", referencedColumnName = "id")})
 //    @JoinColumn(name = "avaliacoes_criadas_usuario")
-    @OneToMany(mappedBy = "usuarioCriador",fetch = FetchType.EAGER) //perguntar para o professor
+    @OneToMany(mappedBy = "usuarioCriador",fetch = FetchType.LAZY) //perguntar para o professor
     @JsonBackReference
     private List<Avaliacao> avaliacoes;
 
     @ManyToMany
+    @JsonBackReference
     @JoinTable(name = "usuario_periodo", joinColumns = {
         @JoinColumn(name = "usuario_id")}, inverseJoinColumns = {
         @JoinColumn(name = "periodo_id")})
@@ -66,6 +67,15 @@ public class UsuarioSasac {
         this.avaliacoes = avaliacoes;
     }
 
+    public List<Periodo> getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(List<Periodo> periodo) {
+        this.periodo = periodo;
+    }
+
+    
     public Perfil getPerfil() {
         return perfil;
     }

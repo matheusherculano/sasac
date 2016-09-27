@@ -2,10 +2,12 @@ package br.com.sasac.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,7 +40,8 @@ public class Periodo {
     @JsonBackReference
     private Avaliacao avaliacao;
     
-    @ManyToMany(mappedBy="periodo")
+    @ManyToMany(mappedBy="periodo", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<UsuarioSasac> usuarios;
     
      @Column(name = "respostas_positivas")
