@@ -1,5 +1,5 @@
-INSERT INTO sasac.avaliacao (descricao, dt_disponibilidade, publicado, titulo, repeticao_id, usuario_id) 
-	VALUES ('Qual é a sua opnião sobre a limpeza a organização dos banheiros do campus I', '2016-09-27', true, 'Limpeza dos banheiros', 1, 1);
+INSERT INTO sasac.avaliacao (descricao, dt_disponibilidade, publicado, txt_resposta_negativa, txt_resposta_neutra, txt_resposta_postivia, titulo, repeticao_id, usuario_id) 
+	VALUES ('Qual a opinião sobre a limpeza e a organização dos banheiros', '2016-09-28', true, 'Ruim', 'Não tenho opinião', 'Boa', 'Limpeza dos banheiros', 1, 1);
 
 INSERT INTO sasac.periodo (dt_publicacao, respostas_negativas, respostas_neutras, respostas_positivas, avaliacao_id) 
 	VALUES ('2016-09-27', 1, 0, 2, 1);
