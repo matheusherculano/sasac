@@ -5,12 +5,16 @@
  */
 package br.com.sasac.service.impl;
 
+import br.com.sasac.DTO.DadosPeriodosDTO;
 import br.com.sasac.DTO.RespostaDTO;
+import br.com.sasac.model.Avaliacao;
 import br.com.sasac.model.Periodo;
 import br.com.sasac.model.UsuarioSasac;
+import br.com.sasac.repository.AvaliacaoRepository;
 import br.com.sasac.repository.PeriodoRepository;
 import br.com.sasac.repository.UsuarioRepository;
 import br.com.sasac.service.PeriodoService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,21 +30,23 @@ public class PeriodoServiceImpl implements PeriodoService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    
+    @Autowired
+    private AvaliacaoRepository avaliacaoRepository;
 
     @Override
     public boolean getPermissionToAnswer(Long idUsuario) {
-//        boolean boo = true;
-//
-//        Periodo p = periodoRepository.findOne(idUsuario);
-//        
-//        for(UsuarioSasac item : p.getUsuarios()){
-//            if(item.getId().equals(idUsuario)){
-//                boo = false;
-//            }
-//        }
-//        
-//        return boo;
-        return false;
+        boolean boo = true;
+
+        Periodo p = periodoRepository.findOne(idUsuario);
+        
+        for(UsuarioSasac item : p.getUsuarios()){
+            if(item.getId().equals(idUsuario)){
+                boo = false;
+            }
+        }
+        
+        return boo;
     }
 
     @Override
@@ -74,5 +80,27 @@ public class PeriodoServiceImpl implements PeriodoService {
 
         usuarioRepository.save(u);
 
+    }
+
+    @Override
+    public List<DadosPeriodosDTO> getDadosPeriodos(Long idAvaliLong) {
+        System.out.println("aaaaaaaaaaaaaaa "+idAvaliLong);
+        
+        Avaliacao a = avaliacaoRepository.findOne(idAvaliLong);
+        List<DadosPeriodosDTO> lista = null;
+        
+        //montagem dados para renderizar grafico no front-end
+        for (Periodo item : a.getPeriodo()) {
+            DadosPeriodosDTO dto = new DadosPeriodosDTO();
+            
+            dto.setId(item.getId());
+            dto.setRespostasNegativas(item.getRespostasNegativas());
+            dto.setRespostasNeutras(item.getRespostasNeutras());
+            dto.setRespostasPositivas(item.getRespostasPositivas());
+            
+            lista.add(dto);
+        }
+        
+        return lista;
     }
 }

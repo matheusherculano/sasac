@@ -45,7 +45,7 @@ public class UsuarioSasac {
     @JsonBackReference
     private List<Avaliacao> avaliacoes;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JsonBackReference
     @JoinTable(name = "usuario_periodo", joinColumns = {
         @JoinColumn(name = "usuario_id")}, inverseJoinColumns = {

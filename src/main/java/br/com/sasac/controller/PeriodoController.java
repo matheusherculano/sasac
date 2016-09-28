@@ -5,14 +5,17 @@
  */
 package br.com.sasac.controller;
 
+import br.com.sasac.DTO.DadosPeriodosDTO;
 import br.com.sasac.DTO.RespostaDTO;
 import br.com.sasac.model.Periodo;
 import br.com.sasac.service.PeriodoService;
 import br.com.sasac.service.impl.PeriodoServiceImpl;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,10 +34,10 @@ public class PeriodoController extends CustomController<Periodo, CrudRepository<
 
     @RequestMapping(path = "/resposta", method = RequestMethod.POST)
     public ResponseEntity responder(@RequestBody RespostaDTO dto) {
+        System.out.println("resultado "+ service.getPermissionToAnswer(dto.getIdUsuario()));
+        if (service.getPermissionToAnswer(dto.getIdUsuario())) {
 
-//        if (service.getPermissionToAnswer(dto.getIdUsuario())) {
-
-            //verificar o tipo da resposta
+//            verificar o tipo da resposta
             if (dto.getResposta().equals("neu") || dto.getResposta().equals("pos") || dto.getResposta().equals("neg")) {
                 service.addUsuario(dto);
 
@@ -43,9 +46,17 @@ public class PeriodoController extends CustomController<Periodo, CrudRepository<
                 return new ResponseEntity(dto, HttpStatus.NOT_ACCEPTABLE);
 
             }
-//        }else{
-//            return new ResponseEntity(dto, HttpStatus.UNAUTHORIZED);
-//        }
-
+        }else{
+            return new ResponseEntity(dto, HttpStatus.UNAUTHORIZED);
+        }
+    }
+    
+    
+    @RequestMapping(value = "/a",method = RequestMethod.GET)
+    public ResponseEntity getGrafico() {
+        
+        List<DadosPeriodosDTO> lista = service.getDadosPeriodos(1L);
+        
+            return new ResponseEntity(lista, HttpStatus.OK);
     }
 }

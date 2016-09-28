@@ -44,7 +44,7 @@ public class Avaliacao {
 //                      referencedColumnName="id")},  
 //                     inverseJoinColumns={@JoinColumn(name="periodo_id", 
 //                       referencedColumnName="id")})  
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="avaliacao")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="avaliacao", fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Periodo> periodo;
      
@@ -68,7 +68,7 @@ public class Avaliacao {
     
     public Avaliacao() {
     }
-
+ 
     public UsuarioSasac getUsuarioCriador() {
         return usuarioCriador;
     }

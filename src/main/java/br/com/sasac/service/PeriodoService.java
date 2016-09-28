@@ -5,7 +5,9 @@
  */
 package br.com.sasac.service;
 
+import br.com.sasac.DTO.DadosPeriodosDTO;
 import br.com.sasac.DTO.RespostaDTO;
+import java.util.List;
 
 /**
  *
@@ -13,7 +15,9 @@ import br.com.sasac.DTO.RespostaDTO;
  */
 public interface PeriodoService {
 
-    public void addUsuario(RespostaDTO dto);
+    public abstract void addUsuario(RespostaDTO dto);
 
-    public boolean getPermissionToAnswer(Long idUsuario);
+    public abstract boolean getPermissionToAnswer(Long idUsuario);
+    
+    public List<DadosPeriodosDTO> getDadosPeriodos(Long idAvaliLong);
 }
