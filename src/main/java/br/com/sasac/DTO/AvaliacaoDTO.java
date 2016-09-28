@@ -2,7 +2,7 @@ package br.com.sasac.DTO;
 
 import br.com.sasac.model.Periodo;
 import br.com.sasac.model.Repeticao;
-import br.com.sasac.model.UsuarioSasac;
+import br.com.sasac.model.Usuario;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class AvaliacaoDTO {
     
     private Long id;
     
-    private UsuarioSasac usuarioCriador;
+    private Usuario usuarioCriador;
     
     private String titulo;
 
@@ -35,11 +35,11 @@ public class AvaliacaoDTO {
         this.id = id;
     }
 
-    public UsuarioSasac getUsuarioCriador() {
+    public Usuario getUsuarioCriador() {
         return usuarioCriador;
     }
 
-    public void setUsuarioCriador(UsuarioSasac usuarioCriador) {
+    public void setUsuarioCriador(Usuario usuarioCriador) {
         this.usuarioCriador = usuarioCriador;
     }
 

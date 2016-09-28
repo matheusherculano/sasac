@@ -5,6 +5,7 @@
  */
 package br.com.sasac.controller;
 
+import br.com.sasac.DTO.DadosGraficoDTO;
 import br.com.sasac.DTO.DadosPeriodosDTO;
 import br.com.sasac.DTO.RespostaDTO;
 import br.com.sasac.model.Periodo;
@@ -34,7 +35,8 @@ public class PeriodoController extends CustomController<Periodo, CrudRepository<
 
     @RequestMapping(path = "/resposta", method = RequestMethod.POST)
     public ResponseEntity responder(@RequestBody RespostaDTO dto) {
-        System.out.println("resultado "+ service.getPermissionToAnswer(dto.getIdUsuario()));
+
+        //verificar se o usuário já respondeu esse periodo
         if (service.getPermissionToAnswer(dto.getIdUsuario())) {
 
 //            verificar o tipo da resposta
@@ -52,11 +54,11 @@ public class PeriodoController extends CustomController<Periodo, CrudRepository<
     }
     
     
-    @RequestMapping(value = "/a",method = RequestMethod.GET)
-    public ResponseEntity getGrafico() {
+    @RequestMapping(value = "/grafico/{idAvaliacao}",method = RequestMethod.GET)
+    public ResponseEntity getGrafico(@PathVariable Long idAvaliacao) {
         
-        List<DadosPeriodosDTO> lista = service.getDadosPeriodos(1L);
+         DadosGraficoDTO dto = service.getDadosPeriodos(idAvaliacao);
         
-            return new ResponseEntity(lista, HttpStatus.OK);
+            return new ResponseEntity(dto, HttpStatus.OK);
     }
 }

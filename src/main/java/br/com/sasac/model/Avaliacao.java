@@ -35,7 +35,7 @@ public class Avaliacao {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id")
-    private UsuarioSasac usuarioCriador;
+    private Usuario usuarioCriador;
     
     
 //     @OneToMany(fetch = FetchType.EAGER)
@@ -69,11 +69,11 @@ public class Avaliacao {
     public Avaliacao() {
     }
  
-    public UsuarioSasac getUsuarioCriador() {
+    public Usuario getUsuarioCriador() {
         return usuarioCriador;
     }
 
-    public void setUsuarioCriador(UsuarioSasac usuarioCriador) {
+    public void setUsuarioCriador(Usuario usuarioCriador) {
         this.usuarioCriador = usuarioCriador;
     }
 

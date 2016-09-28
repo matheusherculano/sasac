@@ -7,6 +7,7 @@ package br.com.sasac.service;
 
 import br.com.sasac.DTO.AvaliacaoDTO;
 import br.com.sasac.repository.AvaliacaoRepository;
+import java.util.List;
 
 /**
  *
@@ -15,4 +16,6 @@ import br.com.sasac.repository.AvaliacaoRepository;
 public interface AvaliacaoService {
     
     public abstract AvaliacaoDTO getAvaliacao(Long id);
+    
+    public abstract List<AvaliacaoDTO> getMinhasAvaliacoes(Long id);
 }

@@ -1,24 +1,24 @@
 INSERT INTO sasac.perfil (perfil) 
-	VALUES ('Coordenador')
+	VALUES ('Coordenador');
 INSERT INTO sasac.perfil (perfil) 
-	VALUES ('Aluno')
+	VALUES ('Aluno');
 INSERT INTO sasac.perfil (perfil) 
-	VALUES ('Professor')
+	VALUES ('Professor');
 INSERT INTO sasac.repeticao (repeticao) 
-	VALUES ('Semanal')
+	VALUES ('Semanal');
 INSERT INTO sasac.repeticao (repeticao) 
-	VALUES ('Mensal')
+	VALUES ('Mensal');
 INSERT INTO sasac.repeticao (repeticao) 
-	VALUES ('Bimestral')
+	VALUES ('Bimestral');
 INSERT INTO sasac.repeticao (repeticao) 
-	VALUES ('Trimestral')
+	VALUES ('Trimestral');
 INSERT INTO sasac.repeticao (repeticao) 
-	VALUES ('Semestral')
+	VALUES ('Semestral');
 INSERT INTO sasac.repeticao (repeticao) 
-	VALUES ('Anual')
+	VALUES ('Anual');
 INSERT INTO sasac.usuario (nome_usuario, perfil_id) 
-	VALUES ('Fernando', 1)
+	VALUES ('Fernando', 1);
 INSERT INTO sasac.usuario (nome_usuario, perfil_id) 
-	VALUES ('Matheus', 2)
+	VALUES ('Matheus', 2);
 INSERT INTO sasac.usuario (nome_usuario, perfil_id) 
-	VALUES ('Rafael', 3)
+	VALUES ('Rafael', 3);

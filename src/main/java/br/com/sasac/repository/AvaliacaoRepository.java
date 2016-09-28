@@ -6,7 +6,7 @@
 package br.com.sasac.repository;
 
 import br.com.sasac.model.Avaliacao;
-import br.com.sasac.model.UsuarioSasac;
+import br.com.sasac.model.Usuario;
 import java.util.List;
 import org.jboss.logging.Param;
 import org.springframework.data.jpa.repository.Query;
@@ -22,5 +22,5 @@ public interface AvaliacaoRepository extends CrudRepository<Avaliacao, Long>{
     
     public Avaliacao findByTitulo(String titulo);
     
-    public List<Avaliacao> findByUsuarioCriador(UsuarioSasac u);
+    public List<Avaliacao> findByUsuarioCriador(Usuario u);
 }

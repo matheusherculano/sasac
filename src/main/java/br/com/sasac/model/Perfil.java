@@ -29,7 +29,7 @@ public class Perfil {
     @OneToMany(mappedBy = "perfil",fetch = FetchType.LAZY)
 //    @JoinTable(name="Perfil_Usuario", joinColumns={@JoinColumn(name="Perfil_id", referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(name="Usuario", referencedColumnName="id")})
 //    @JsonManagedReference(value = "perfil-usuario")
-    private List<UsuarioSasac> usuarios; 
+    private List<Usuario> usuarios; 
 
     
     public Perfil() {

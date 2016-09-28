@@ -42,7 +42,7 @@ public class Periodo {
     
     @ManyToMany(mappedBy="periodo", fetch = FetchType.LAZY)
     @JsonManagedReference
-    private List<UsuarioSasac> usuarios;
+    private List<Usuario> usuarios;
     
      @Column(name = "respostas_positivas")
     private int respostasPositivas;
@@ -53,11 +53,11 @@ public class Periodo {
     @Column(name = "respostas_negativas")
     private int respostasNegativas;
 
-    public List<UsuarioSasac> getUsuarios() {
+    public List<Usuario> getUsuarios() {
         return usuarios;
     }
 
-    public void setUsuarios(List<UsuarioSasac> usuarios) {
+    public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
     

@@ -1,6 +1,6 @@
 package br.com.sasac.controller;
 
-import br.com.sasac.model.UsuarioSasac;
+import br.com.sasac.model.Usuario;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/usuario")
-public class UsuarioController extends CustomController<UsuarioSasac, CrudRepository<UsuarioSasac, Long>> {
+public class UsuarioController extends CustomController<Usuario, CrudRepository<Usuario, Long>> {
 
 }

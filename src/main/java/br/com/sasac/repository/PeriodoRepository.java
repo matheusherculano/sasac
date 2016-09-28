@@ -5,8 +5,11 @@
  */
 package br.com.sasac.repository;
 
+import br.com.sasac.model.Avaliacao;
 import br.com.sasac.model.Periodo;
-import br.com.sasac.model.UsuarioSasac;
+import java.util.List;
+import org.jboss.logging.Param;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +20,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PeriodoRepository extends CrudRepository<Periodo, Long> {
 
-    
 }

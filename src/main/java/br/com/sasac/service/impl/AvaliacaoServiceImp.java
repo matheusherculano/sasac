@@ -7,8 +7,11 @@ package br.com.sasac.service.impl;
 
 import br.com.sasac.DTO.AvaliacaoDTO;
 import br.com.sasac.model.Avaliacao;
+import br.com.sasac.model.Usuario;
 import br.com.sasac.repository.AvaliacaoRepository;
 import br.com.sasac.service.AvaliacaoService;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +39,31 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
         dto.setUsuarioCriador(a.getUsuarioCriador());
         
         return dto;
+    }
+
+    @Override
+    public List<AvaliacaoDTO> getMinhasAvaliacoes(Long id) {
+        Usuario usuario = new Usuario();
+        usuario.setId(id);
+        
+        List<Avaliacao> avaliacaoList = avaliacaoRepository.findByUsuarioCriador(usuario);
+        
+         List<AvaliacaoDTO> lista = new ArrayList<AvaliacaoDTO>();
+         
+         for(Avaliacao item : avaliacaoList){
+             AvaliacaoDTO dto = new AvaliacaoDTO();
+             
+             dto.setId(item.getId());
+             dto.setTitulo(item.getTitulo());
+             dto.setDescricao(item.getDescricao());
+             dto.setPublicado(item.isPublicado());
+             dto.setDt_disponibilidade(item.getDt_disponibilidade());
+             dto.setUsuarioCriador(item.getUsuarioCriador());
+             
+             lista.add(dto);
+         }
+         
+        return lista;
     }
 
 }

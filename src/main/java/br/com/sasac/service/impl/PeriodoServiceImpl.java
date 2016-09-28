@@ -5,15 +5,17 @@
  */
 package br.com.sasac.service.impl;
 
+import br.com.sasac.DTO.DadosGraficoDTO;
 import br.com.sasac.DTO.DadosPeriodosDTO;
 import br.com.sasac.DTO.RespostaDTO;
 import br.com.sasac.model.Avaliacao;
 import br.com.sasac.model.Periodo;
-import br.com.sasac.model.UsuarioSasac;
+import br.com.sasac.model.Usuario;
 import br.com.sasac.repository.AvaliacaoRepository;
 import br.com.sasac.repository.PeriodoRepository;
 import br.com.sasac.repository.UsuarioRepository;
 import br.com.sasac.service.PeriodoService;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +42,7 @@ public class PeriodoServiceImpl implements PeriodoService {
 
         Periodo p = periodoRepository.findOne(idUsuario);
         
-        for(UsuarioSasac item : p.getUsuarios()){
+        for(Usuario item : p.getUsuarios()){
             if(item.getId().equals(idUsuario)){
                 boo = false;
             }
@@ -74,7 +76,7 @@ public class PeriodoServiceImpl implements PeriodoService {
             p.setRespostasNeutras(count);
         }
 
-        UsuarioSasac u = usuarioRepository.findOne(dto.getIdUsuario());
+        Usuario u = usuarioRepository.findOne(dto.getIdUsuario());
 
         u.getPeriodo().add(p);
 
@@ -83,11 +85,10 @@ public class PeriodoServiceImpl implements PeriodoService {
     }
 
     @Override
-    public List<DadosPeriodosDTO> getDadosPeriodos(Long idAvaliLong) {
-        System.out.println("aaaaaaaaaaaaaaa "+idAvaliLong);
-        
+    public DadosGraficoDTO getDadosPeriodos(Long idAvaliLong) {
+
         Avaliacao a = avaliacaoRepository.findOne(idAvaliLong);
-        List<DadosPeriodosDTO> lista = null;
+        List<DadosPeriodosDTO> lista = new ArrayList<DadosPeriodosDTO>();
         
         //montagem dados para renderizar grafico no front-end
         for (Periodo item : a.getPeriodo()) {
@@ -101,6 +102,12 @@ public class PeriodoServiceImpl implements PeriodoService {
             lista.add(dto);
         }
         
-        return lista;
+        DadosGraficoDTO dto = new DadosGraficoDTO();
+        dto.setTitulo(a.getTitulo());
+        dto.setDescricao(a.getDescricao());
+        dto.setPeriodos(lista);
+        
+        return dto;
     }
+
 }

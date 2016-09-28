@@ -20,7 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "usuario")
-public class UsuarioSasac {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,11 +36,6 @@ public class UsuarioSasac {
 //    @JsonBackReference(value = "perfil-usuario")
     private Perfil perfil;
 
-    //esse aqui de baixo é o jeito antigo
-//    @JoinTable(name = "usuario_avaliacao", joinColumns = {
-//        @JoinColumn(name = "usuario", referencedColumnName = "id")}, inverseJoinColumns = {
-//        @JoinColumn(name = "avaliacao", referencedColumnName = "id")})
-//    @JoinColumn(name = "avaliacoes_criadas_usuario")
     @OneToMany(mappedBy = "usuarioCriador",fetch = FetchType.LAZY) //perguntar para o professor
     @JsonBackReference
     private List<Avaliacao> avaliacoes;
@@ -52,7 +47,7 @@ public class UsuarioSasac {
         @JoinColumn(name = "periodo_id")})
     private List<Periodo> periodo;
 
-    public UsuarioSasac() {
+    public Usuario() {
     }
 
     public String getNome() {
