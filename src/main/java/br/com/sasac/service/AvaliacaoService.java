@@ -17,6 +17,8 @@ public interface AvaliacaoService {
     
     public abstract AvaliacaoDTO getAvaliacao(Long id);
     
+    public abstract List<AvaliacaoDTO> getAvaliacao();
+    
     public abstract List<AvaliacaoDTO> getMinhasAvaliacoes(Long id);
     
     public abstract List<AvaliacaoDTO> getAvaliacoesPublicas();

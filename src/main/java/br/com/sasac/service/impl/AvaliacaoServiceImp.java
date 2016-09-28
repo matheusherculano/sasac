@@ -37,7 +37,7 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
         dto.setPublicado(a.isPublicado());
         dto.setTitulo(a.getTitulo());
         dto.setUsuarioCriador(a.getUsuarioCriador());
-        
+
         return dto;
     }
 
@@ -45,24 +45,41 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
     public List<AvaliacaoDTO> getMinhasAvaliacoes(Long id) {
         Usuario usuario = new Usuario();
         usuario.setId(id);
-        
+
         List<Avaliacao> avaliacaoList = avaliacaoRepository.findByUsuarioCriador(usuario);
-        
-         List<AvaliacaoDTO> lista = new ArrayList<AvaliacaoDTO>();
-         
-         for(Avaliacao item : avaliacaoList){
-             AvaliacaoDTO dto = new AvaliacaoDTO();
-             
-             dto.setId(item.getId());
-             dto.setTitulo(item.getTitulo());
-             dto.setDescricao(item.getDescricao());
-             dto.setPublicado(item.isPublicado());
-             dto.setDt_disponibilidade(item.getDt_disponibilidade());
-             dto.setUsuarioCriador(item.getUsuarioCriador());
-             
-             lista.add(dto);
-         }
-         
+
+        List<AvaliacaoDTO> lista = new ArrayList<AvaliacaoDTO>();
+
+        for (Avaliacao item : avaliacaoList) {
+            AvaliacaoDTO dto = new AvaliacaoDTO();
+
+            dto.setId(item.getId());
+            dto.setTitulo(item.getTitulo());
+            dto.setDescricao(item.getDescricao());
+            dto.setPublicado(item.isPublicado());
+            dto.setDt_disponibilidade(item.getDt_disponibilidade());
+            dto.setUsuarioCriador(item.getUsuarioCriador());
+
+            lista.add(dto);
+        }
+
+        return lista;
+    }
+
+    @Override
+    public List<AvaliacaoDTO> getAvaliacao() {
+        Usuario usuario = new Usuario();
+
+        Iterable<Avaliacao> avaliacaoList = avaliacaoRepository.findAll();
+
+        List<AvaliacaoDTO> lista = new ArrayList<AvaliacaoDTO>();
+
+        for (Avaliacao item : avaliacaoList) {
+            AvaliacaoDTO dto = new AvaliacaoDTO(item);
+
+            lista.add(dto);
+        }
+
         return lista;
     }
 
@@ -70,33 +87,26 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
     public List<AvaliacaoDTO> getAvaliacoesPublicas() {
         List<Avaliacao> avaliacoes = avaliacaoRepository.findByPublicado(true);
         List<AvaliacaoDTO> lista = new ArrayList<AvaliacaoDTO>();
-        
-         for(Avaliacao item : avaliacoes){
-             AvaliacaoDTO dto = new AvaliacaoDTO();
-             
-             dto.setId(item.getId());
-             dto.setTitulo(item.getTitulo());
-             dto.setDescricao(item.getDescricao());
-             dto.setPublicado(item.isPublicado());
-             dto.setDt_disponibilidade(item.getDt_disponibilidade());
-             dto.setUsuarioCriador(item.getUsuarioCriador());
-             
-             lista.add(dto);
-         }
-         
-          return lista;
+
+        for (Avaliacao item : avaliacoes) {
+            AvaliacaoDTO dto = new AvaliacaoDTO(item);
+
+            lista.add(dto);
+        }
+
+        return lista;
     }
 
     @Override
     public void setPublicacao(Long idAvaliacao) {
         Avaliacao avaliacao = avaliacaoRepository.findOne(idAvaliacao);
-        
-        if(avaliacao.isPublicado()){
+
+        if (avaliacao.isPublicado()) {
             avaliacao.setPublicado(false);
-        }else{
+        } else {
             avaliacao.setPublicado(true);
         }
-        
+
         avaliacaoRepository.save(avaliacao);
     }
 

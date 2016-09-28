@@ -1,5 +1,6 @@
 package br.com.sasac.DTO;
 
+import br.com.sasac.model.Avaliacao;
 import br.com.sasac.model.Periodo;
 import br.com.sasac.model.Repeticao;
 import br.com.sasac.model.Usuario;
@@ -23,9 +24,29 @@ public class AvaliacaoDTO {
     private Date  dt_disponibilidade;
 
     private boolean publicado;
+    
+    private String respostaPostivia;
+    
+    private String respostaNeutra;
+    
+    private String respostaNegativa;
 
     public AvaliacaoDTO() {
     }
+
+    public AvaliacaoDTO(Avaliacao avaliacao) {
+        this.id = avaliacao.getId();
+        this.usuarioCriador = avaliacao.getUsuarioCriador();
+        this.titulo = avaliacao.getTitulo();
+        this.descricao = avaliacao.getDescricao();
+        this.dt_disponibilidade = avaliacao.getDt_disponibilidade();
+        this.publicado = avaliacao.isPublicado();
+        this.respostaPostivia = avaliacao.getRespostaPostivia();
+        this.respostaNeutra = avaliacao.getRespostaNeutra();
+        this.respostaNegativa = avaliacao.getRespostaNegativa();
+    }
+    
+    
 
     public Long getId() {
         return id;
@@ -35,6 +56,31 @@ public class AvaliacaoDTO {
         this.id = id;
     }
 
+    public String getRespostaPostivia() {
+        return respostaPostivia;
+    }
+
+    public void setRespostaPostivia(String respostaPostivia) {
+        this.respostaPostivia = respostaPostivia;
+    }
+
+    public String getRespostaNeutra() {
+        return respostaNeutra;
+    }
+
+    public void setRespostaNeutra(String respostaNeutra) {
+        this.respostaNeutra = respostaNeutra;
+    }
+
+    public String getRespostaNegativa() {
+        return respostaNegativa;
+    }
+
+    public void setRespostaNegativa(String respostaNegativa) {
+        this.respostaNegativa = respostaNegativa;
+    }
+
+    
     public Usuario getUsuarioCriador() {
         return usuarioCriador;
     }

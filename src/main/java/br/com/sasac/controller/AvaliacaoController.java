@@ -26,6 +26,14 @@ public class AvaliacaoController extends CustomController<Avaliacao, CrudReposit
     private AvaliacaoService avaliacaoService;
     
     @Override
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity get(){
+         List<AvaliacaoDTO> dto  = avaliacaoService.getAvaliacao();
+        
+        return new ResponseEntity(dto, HttpStatus.OK);
+    }
+    
+    @Override
     @RequestMapping(value = "/{idAvaliacao}",method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable Long idAvaliacao){
         AvaliacaoDTO dto = avaliacaoService.getAvaliacao(idAvaliacao);
@@ -39,6 +47,7 @@ public class AvaliacaoController extends CustomController<Avaliacao, CrudReposit
         
         return new ResponseEntity(dto, HttpStatus.OK);
     }
+    
     
     @RequestMapping(value = "/publicado",method = RequestMethod.GET)
     public ResponseEntity getAvaliacoesPublicas(){

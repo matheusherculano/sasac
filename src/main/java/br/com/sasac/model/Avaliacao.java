@@ -91,7 +91,30 @@ public class Avaliacao {
         this.repeticao = repeticao;
     }
 
-    
+    public String getRespostaPostivia() {
+        return respostaPostivia;
+    }
+
+    public void setRespostaPostivia(String respostaPostivia) {
+        this.respostaPostivia = respostaPostivia;
+    }
+
+    public String getRespostaNeutra() {
+        return respostaNeutra;
+    }
+
+    public void setRespostaNeutra(String respostaNeutra) {
+        this.respostaNeutra = respostaNeutra;
+    }
+
+    public String getRespostaNegativa() {
+        return respostaNegativa;
+    }
+
+    public void setRespostaNegativa(String respostaNegativa) {
+        this.respostaNegativa = respostaNegativa;
+    }
+
     
     public List<Periodo> getPeriodo() {
         return periodo;
