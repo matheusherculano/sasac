@@ -3,6 +3,7 @@ package br.com.sasac.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -28,14 +29,14 @@ public class Periodo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "dt_publicacao")
+    @Column(name = "dt_publicacao", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dt_publicacao;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "avaliacao_id")
     @JsonBackReference
     private Avaliacao avaliacao;
@@ -44,13 +45,13 @@ public class Periodo {
     @JsonManagedReference
     private List<Usuario> usuarios;
     
-     @Column(name = "respostas_positivas")
+     @Column(name = "respostas_positivas", nullable = true, length = 30)
     private int respostasPositivas;
 
-    @Column(name = "respostas_neutras")
+    @Column(name = "respostas_neutras", nullable = true, length = 30)
     private int respostasNeutras;
 
-    @Column(name = "respostas_negativas")
+    @Column(name = "respostas_negativas", nullable = true, length = 30)
     private int respostasNegativas;
     
     public Periodo() {
@@ -61,6 +62,7 @@ public class Periodo {
         this.respostasNegativas = 0;
         this.respostasNeutras = 0;
         this.respostasPositivas = 0;
+        this.dt_publicacao = Date.from(Instant.now());
     }
 
     public List<Usuario> getUsuarios() {

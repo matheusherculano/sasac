@@ -24,15 +24,15 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "nome_usuario")
+    @Column(name = "nome_usuario", nullable = false, length = 150)
     private String nome;
 
 //    @ManyToOne(fetch = FetchType.LAZY) perguntar esse lazy para o professor
     @ManyToOne
-    @JoinColumn(name = "perfil_id")
+    @JoinColumn(name = "perfil_id", nullable = false)
 //    @JsonBackReference(value = "perfil-usuario")
     private Perfil perfil;
 

@@ -17,10 +17,10 @@ public class Repeticao {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "repeticao")
+    @Column(name = "repeticao", nullable = false, length = 30)
     private String repeticao;
     
     

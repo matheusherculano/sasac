@@ -20,10 +20,10 @@ public class Perfil {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "perfil")
+    @Column(name = "perfil", nullable = false, length = 30)
     private String perfil;
     
     @OneToMany(mappedBy = "perfil",fetch = FetchType.LAZY)

@@ -11,11 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,10 +27,10 @@ public class Avaliacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "usuario_id")
     private Usuario usuarioCriador;
     
@@ -48,22 +45,31 @@ public class Avaliacao {
     @JsonManagedReference
     private List<Periodo> periodo;
      
-     @ManyToOne
+     @ManyToOne(optional = true)
     @JoinColumn(name = "repeticao_id")
      private Repeticao repeticao;
      
-    @Column(name = "titulo", nullable = false)
+    @Column(name = "titulo", nullable = false , length = 40)
     private String titulo;
 
-    @Column(name = "descricao", nullable = true)
+    @Column(name = "descricao", nullable = true , length = 300)
     private String descricao;
+    
+    @Column(name = "txt_resposta_Postivia", nullable = false , length = 40)
+    private String respostaPostivia;
+    
+    @Column(name = "txt_resposta_Neutra", nullable = false , length = 40)
+    private String respostaNeutra;
+    
+    @Column(name = "txt_resposta_Negativa", nullable = false, length = 40)
+    private String respostaNegativa;
 
 
-    @Column(name = "dt_disponibilidade")
+    @Column(name = "dt_disponibilidade", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date  dt_disponibilidade;
 
-    @Column(name = "publicado")
+    @Column(name = "publicado", nullable = false)
     private boolean publicado;
     
     public Avaliacao() {
