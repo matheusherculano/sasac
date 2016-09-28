@@ -66,4 +66,38 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
         return lista;
     }
 
+    @Override
+    public List<AvaliacaoDTO> getAvaliacoesPublicas() {
+        List<Avaliacao> avaliacoes = avaliacaoRepository.findByPublicado(true);
+        List<AvaliacaoDTO> lista = new ArrayList<AvaliacaoDTO>();
+        
+         for(Avaliacao item : avaliacoes){
+             AvaliacaoDTO dto = new AvaliacaoDTO();
+             
+             dto.setId(item.getId());
+             dto.setTitulo(item.getTitulo());
+             dto.setDescricao(item.getDescricao());
+             dto.setPublicado(item.isPublicado());
+             dto.setDt_disponibilidade(item.getDt_disponibilidade());
+             dto.setUsuarioCriador(item.getUsuarioCriador());
+             
+             lista.add(dto);
+         }
+         
+          return lista;
+    }
+
+    @Override
+    public void setPublicacao(Long idAvaliacao) {
+        Avaliacao avaliacao = avaliacaoRepository.findOne(idAvaliacao);
+        
+        if(avaliacao.isPublicado()){
+            avaliacao.setPublicado(false);
+        }else{
+            avaliacao.setPublicado(true);
+        }
+        
+        avaliacaoRepository.save(avaliacao);
+    }
+
 }

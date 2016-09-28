@@ -23,4 +23,6 @@ public interface AvaliacaoRepository extends CrudRepository<Avaliacao, Long>{
     public Avaliacao findByTitulo(String titulo);
     
     public List<Avaliacao> findByUsuarioCriador(Usuario u);
+    
+    public List<Avaliacao> findByPublicado(boolean boo);
 }

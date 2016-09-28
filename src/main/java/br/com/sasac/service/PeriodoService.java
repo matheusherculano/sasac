@@ -20,5 +20,7 @@ public interface PeriodoService {
 
     public abstract boolean getPermissionToAnswer(Long idUsuario);
     
-    public DadosGraficoDTO getDadosPeriodos(Long idAvaliLong);
+    public abstract DadosGraficoDTO getDadosPeriodos(Long idAvaliLong);
+    
+    public abstract void newPeriodo(Long idAvaliacao);
 }

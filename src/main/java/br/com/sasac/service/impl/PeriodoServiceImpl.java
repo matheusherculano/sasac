@@ -35,6 +35,15 @@ public class PeriodoServiceImpl implements PeriodoService {
     
     @Autowired
     private AvaliacaoRepository avaliacaoRepository;
+    
+    public void newPeriodo(Long idAvaliacao){
+        Avaliacao pai = new Avaliacao();
+        pai.setId(idAvaliacao);
+        
+        Periodo novo = new Periodo(pai);
+        
+        periodoRepository.save(novo);
+    }
 
     @Override
     public boolean getPermissionToAnswer(Long idUsuario) {

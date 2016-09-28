@@ -6,12 +6,10 @@
 package br.com.sasac.controller;
 
 import br.com.sasac.DTO.DadosGraficoDTO;
-import br.com.sasac.DTO.DadosPeriodosDTO;
 import br.com.sasac.DTO.RespostaDTO;
 import br.com.sasac.model.Periodo;
+import br.com.sasac.repository.PeriodoRepository;
 import br.com.sasac.service.PeriodoService;
-import br.com.sasac.service.impl.PeriodoServiceImpl;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
@@ -32,7 +30,15 @@ public class PeriodoController extends CustomController<Periodo, CrudRepository<
 
     @Autowired
     private PeriodoService service;
+    
 
+    @RequestMapping(value = "/{idAvaliacao}/novo",method = RequestMethod.POST)
+    public ResponseEntity save(@PathVariable Long idAvaliacao) {
+        service.newPeriodo(idAvaliacao);
+        
+        return new ResponseEntity(HttpStatus.OK);
+    }
+    
     @RequestMapping(path = "/resposta", method = RequestMethod.POST)
     public ResponseEntity responder(@RequestBody RespostaDTO dto) {
 
@@ -43,13 +49,13 @@ public class PeriodoController extends CustomController<Periodo, CrudRepository<
             if (dto.getResposta().equals("neu") || dto.getResposta().equals("pos") || dto.getResposta().equals("neg")) {
                 service.addUsuario(dto);
 
-                return new ResponseEntity(dto, HttpStatus.OK);
+                return new ResponseEntity(HttpStatus.OK);
             } else {
-                return new ResponseEntity(dto, HttpStatus.NOT_ACCEPTABLE);
+                return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
 
             }
         }else{
-            return new ResponseEntity(dto, HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }
     }
     

@@ -52,6 +52,16 @@ public class Periodo {
 
     @Column(name = "respostas_negativas")
     private int respostasNegativas;
+    
+    public Periodo() {
+    }
+    
+    public Periodo(Avaliacao avaliacao){
+        this.avaliacao = avaliacao;
+        this.respostasNegativas = 0;
+        this.respostasNeutras = 0;
+        this.respostasPositivas = 0;
+    }
 
     public List<Usuario> getUsuarios() {
         return usuarios;
@@ -86,8 +96,6 @@ public class Periodo {
         this.respostasNegativas = respostasNegativas;
     }
     
-    public Periodo() {
-    }
 
     
     public Long getId() {
