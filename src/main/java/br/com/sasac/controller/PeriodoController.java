@@ -8,16 +8,17 @@ package br.com.sasac.controller;
 import br.com.sasac.DTO.DadosGraficoDTO;
 import br.com.sasac.DTO.RespostaDTO;
 import br.com.sasac.model.Periodo;
-import br.com.sasac.repository.PeriodoRepository;
 import br.com.sasac.service.PeriodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -35,6 +36,18 @@ public class PeriodoController extends CustomController<Periodo, CrudRepository<
     @RequestMapping(value = "/{idAvaliacao}/novo",method = RequestMethod.POST)
     public ResponseEntity save(@PathVariable Long idAvaliacao) {
         service.newPeriodo(idAvaliacao);
+        
+        return new ResponseEntity(HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/teste",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity teste(@RequestBody RespostaDTO dto) {
+//        service.newPeriodo(idAvaliacao);
+
+        System.out.println("Respostas "+dto.getResposta());
+        System.out.println("getIdPeriodo "+dto.getIdPeriodo());
+        System.out.println("getResposta "+dto.getResposta());
         
         return new ResponseEntity(HttpStatus.OK);
     }
