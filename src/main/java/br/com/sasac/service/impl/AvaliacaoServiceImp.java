@@ -27,16 +27,8 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
 
     @Override
     public AvaliacaoDTO getAvaliacao(Long id) {
-        AvaliacaoDTO dto = new AvaliacaoDTO();
         Avaliacao a = avaliacaoRepository.findOne(id);
-
-        //montagem do DTO
-        dto.setDescricao(a.getDescricao());
-        dto.setDt_disponibilidade(a.getDt_disponibilidade());
-        dto.setId(a.getId());
-        dto.setPublicado(a.isPublicado());
-        dto.setTitulo(a.getTitulo());
-        dto.setUsuarioCriador(a.getUsuarioCriador());
+        AvaliacaoDTO dto = new AvaliacaoDTO(a);
 
         return dto;
     }
