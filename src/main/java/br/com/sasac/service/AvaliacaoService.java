@@ -15,13 +15,13 @@ import java.util.List;
  */
 public interface AvaliacaoService {
     
-    public abstract AvaliacaoDTO getAvaliacao(Long id);
+    public  AvaliacaoDTO getAvaliacao(Long id);
     
-    public abstract List<AvaliacaoDTO> getAvaliacao();
+    public  List<AvaliacaoDTO> getAvaliacao();
     
-    public abstract List<AvaliacaoDTO> getMinhasAvaliacoes(Long id);
+    public  List<AvaliacaoDTO> getMinhasAvaliacoes(Long id);
     
-    public abstract List<AvaliacaoDTO> getAvaliacoesPublicas();
+    public  List<AvaliacaoDTO> getAvaliacoesPublicas(boolean boo);
     
-    public abstract void setPublicacao(Long idAvaliacao);
+    public  void setPublicacao(Long idAvaliacao);
 }

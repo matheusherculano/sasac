@@ -1,6 +1,7 @@
 package br.com.sasac.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,24 +25,24 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = true)
     private Long id;
 
-    @Column(name = "nome_usuario", nullable = false, length = 150)
+    @Column(name = "nome_usuario",  length = 150)
     private String nome;
 
 //    @ManyToOne(fetch = FetchType.LAZY) perguntar esse lazy para o professor
     @ManyToOne
-    @JoinColumn(name = "perfil_id", nullable = false)
+    @JoinColumn(name = "perfil_id")
 //    @JsonBackReference(value = "perfil-usuario")
     private Perfil perfil;
 
     @OneToMany(mappedBy = "usuarioCriador",fetch = FetchType.LAZY) //perguntar para o professor
-    @JsonBackReference
+    @JsonIgnore
     private List<Avaliacao> avaliacoes;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonIgnore
     @JoinTable(name = "usuario_periodo", joinColumns = {
         @JoinColumn(name = "usuario_id")}, inverseJoinColumns = {
         @JoinColumn(name = "periodo_id")})

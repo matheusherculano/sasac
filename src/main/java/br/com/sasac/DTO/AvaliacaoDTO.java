@@ -12,24 +12,26 @@ import java.util.List;
  * @author RA21501871
  */
 public class AvaliacaoDTO {
-    
+
     private Long id;
-    
+
     private Usuario usuarioCriador;
-    
+
     private String titulo;
 
     private String descricao;
 
-    private Date  dt_disponibilidade;
+    private Date dt_disponibilidade;
 
     private boolean publicado;
-    
-    private String respostaPostivia;
-    
+
+    private String respostaPositivia;
+
     private String respostaNeutra;
-    
+
     private String respostaNegativa;
+
+    private Repeticao repeticao;
 
     public AvaliacaoDTO() {
     }
@@ -41,12 +43,11 @@ public class AvaliacaoDTO {
         this.descricao = avaliacao.getDescricao();
         this.dt_disponibilidade = avaliacao.getDt_disponibilidade();
         this.publicado = avaliacao.isPublicado();
-        this.respostaPostivia = avaliacao.getRespostaPostivia();
+        this.respostaPositivia = avaliacao.getRespostaPostivia();
         this.respostaNeutra = avaliacao.getRespostaNeutra();
         this.respostaNegativa = avaliacao.getRespostaNegativa();
+        this.repeticao = avaliacao.getRepeticao();
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -56,12 +57,13 @@ public class AvaliacaoDTO {
         this.id = id;
     }
 
+    
     public String getRespostaPostivia() {
-        return respostaPostivia;
+        return respostaPositivia;
     }
 
-    public void setRespostaPostivia(String respostaPostivia) {
-        this.respostaPostivia = respostaPostivia;
+    public void setRespostaPostivia(String respostaPositivia) {
+        this.respostaPositivia = respostaPositivia;
     }
 
     public String getRespostaNeutra() {
@@ -80,7 +82,6 @@ public class AvaliacaoDTO {
         this.respostaNegativa = respostaNegativa;
     }
 
-    
     public Usuario getUsuarioCriador() {
         return usuarioCriador;
     }
@@ -120,8 +121,13 @@ public class AvaliacaoDTO {
     public void setPublicado(boolean publicado) {
         this.publicado = publicado;
     }
-    
-    
-    
-    
+
+    public Repeticao getRepeticao() {
+        return repeticao;
+    }
+
+    public void setRepeticao(Repeticao repeticao) {
+        this.repeticao = repeticao;
+    }
+
 }

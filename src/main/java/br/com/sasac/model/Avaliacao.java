@@ -1,5 +1,6 @@
 package br.com.sasac.model;
 
+import br.com.sasac.DTO.AvaliacaoDTO;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Date;
 import java.util.List;
@@ -30,33 +31,26 @@ public class Avaliacao {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id")
     private Usuario usuarioCriador;
     
     
-//     @OneToMany(fetch = FetchType.EAGER)
-//     @JoinTable(name="periodo_avaliacao",  
-//                     joinColumns={@JoinColumn(name="avaliacao_id", 
-//                      referencedColumnName="id")},  
-//                     inverseJoinColumns={@JoinColumn(name="periodo_id", 
-//                       referencedColumnName="id")})  
     @OneToMany(cascade=CascadeType.ALL, mappedBy="avaliacao", fetch = FetchType.LAZY)
-    @JsonManagedReference
     private List<Periodo> periodo;
      
      @ManyToOne(optional = true)
     @JoinColumn(name = "repeticao_id")
      private Repeticao repeticao;
      
-    @Column(name = "titulo", nullable = false , length = 40)
+    @Column(name = "titulo", length = 40)
     private String titulo;
 
     @Column(name = "descricao", nullable = true , length = 300)
     private String descricao;
     
     @Column(name = "txt_resposta_Postivia", nullable = false , length = 40)
-    private String respostaPostivia;
+    private String respostaPositivia;
     
     @Column(name = "txt_resposta_Neutra", nullable = false , length = 40)
     private String respostaNeutra;
@@ -74,6 +68,21 @@ public class Avaliacao {
     
     public Avaliacao() {
     }
+
+    public Avaliacao(AvaliacaoDTO dto) {
+        this.id = dto.getId();
+        this.usuarioCriador = dto.getUsuarioCriador();
+        this.repeticao = dto.getRepeticao();
+        this.titulo = dto.getTitulo();
+        this.descricao = dto.getDescricao();
+        this.respostaPositivia = dto.getRespostaPostivia();
+        this.respostaNeutra = dto.getRespostaNeutra();
+        this.respostaNegativa = dto.getRespostaNegativa();
+        this.dt_disponibilidade = dto.getDt_disponibilidade();
+        this.publicado = false;
+    }
+    
+    
  
     public Usuario getUsuarioCriador() {
         return usuarioCriador;
@@ -92,11 +101,11 @@ public class Avaliacao {
     }
 
     public String getRespostaPostivia() {
-        return respostaPostivia;
+        return respostaPositivia;
     }
 
-    public void setRespostaPostivia(String respostaPostivia) {
-        this.respostaPostivia = respostaPostivia;
+    public void setRespostaPostivia(String respostaPositivia) {
+        this.respostaPositivia = respostaPositivia;
     }
 
     public String getRespostaNeutra() {
