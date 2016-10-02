@@ -37,6 +37,14 @@ public class AvaliacaoController  {
         
         return new ResponseEntity( HttpStatus.OK);
     }
+    
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity update(@RequestBody AvaliacaoDTO dto) {
+        Avaliacao avaliacao = new Avaliacao(dto);
+        avaliacaoRepository.save(avaliacao);
+        
+        return new ResponseEntity( HttpStatus.OK);
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity get() {
