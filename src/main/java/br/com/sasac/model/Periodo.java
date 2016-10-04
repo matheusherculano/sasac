@@ -40,12 +40,12 @@ public class Periodo {
     @JoinColumn(name = "avaliacao_id")
     @JsonBackReference
     private Avaliacao avaliacao;
-    
-    @ManyToMany(mappedBy="periodo", fetch = FetchType.LAZY)
+
+    @ManyToMany(mappedBy = "periodo", fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Usuario> usuarios;
-    
-     @Column(name = "respostas_positivas", nullable = true, length = 30)
+
+    @Column(name = "respostas_positivas", nullable = true, length = 30)
     private int respostasPositivas;
 
     @Column(name = "respostas_neutras", nullable = true, length = 30)
@@ -53,11 +53,15 @@ public class Periodo {
 
     @Column(name = "respostas_negativas", nullable = true, length = 30)
     private int respostasNegativas;
-    
+
     public Periodo() {
     }
-    
-    public Periodo(Avaliacao avaliacao){
+
+    public Periodo(Long idPeriodo) {
+        this.id = idPeriodo;
+    }
+
+    public Periodo(Avaliacao avaliacao) {
         this.avaliacao = avaliacao;
         this.respostasNegativas = 0;
         this.respostasNeutras = 0;
@@ -72,7 +76,6 @@ public class Periodo {
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
-    
 
     public int getRespostasPositivas() {
         return respostasPositivas;
@@ -97,14 +100,12 @@ public class Periodo {
     public void setRespostasNegativas(int respostasNegativas) {
         this.respostasNegativas = respostasNegativas;
     }
-    
 
-    
     public Long getId() {
         return id;
     }
-    
-     public Avaliacao getAvaliacao() {
+
+    public Avaliacao getAvaliacao() {
         return avaliacao;
     }
 

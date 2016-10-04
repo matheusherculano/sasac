@@ -32,16 +32,16 @@ public class PeriodoServiceImpl implements PeriodoService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-    
+
     @Autowired
     private AvaliacaoRepository avaliacaoRepository;
-    
-    public void newPeriodo(Long idAvaliacao){
+
+    public void newPeriodo(Long idAvaliacao) {
         Avaliacao pai = new Avaliacao();
         pai.setId(idAvaliacao);
-        
+
         Periodo novo = new Periodo(pai);
-        
+
         periodoRepository.save(novo);
     }
 
@@ -50,13 +50,13 @@ public class PeriodoServiceImpl implements PeriodoService {
         boolean boo = true;
 
         Periodo p = periodoRepository.findOne(idUsuario);
-        
-        for(Usuario item : p.getUsuarios()){
-            if(item.getId().equals(idUsuario)){
+
+        for (Usuario item : p.getUsuarios()) {
+            if (item.getId().equals(idUsuario)) {
                 boo = false;
             }
         }
-        
+
         return boo;
     }
 
@@ -98,25 +98,40 @@ public class PeriodoServiceImpl implements PeriodoService {
 
         Avaliacao a = avaliacaoRepository.findOne(idAvaliLong);
         List<DadosPeriodosDTO> lista = new ArrayList<DadosPeriodosDTO>();
-        
+
         //montagem dados para renderizar grafico no front-end
         for (Periodo item : a.getPeriodo()) {
             DadosPeriodosDTO dto = new DadosPeriodosDTO();
-            
+
             dto.setId(item.getId());
             dto.setRespostasNegativas(item.getRespostasNegativas());
             dto.setRespostasNeutras(item.getRespostasNeutras());
             dto.setRespostasPositivas(item.getRespostasPositivas());
-            
+
             lista.add(dto);
         }
-        
+
         DadosGraficoDTO dto = new DadosGraficoDTO();
         dto.setTitulo(a.getTitulo());
         dto.setDescricao(a.getDescricao());
         dto.setPeriodos(lista);
-        
+
         return dto;
+    }
+
+    @Override
+    public List<Periodo> getPeriodoPorAvaliacao(Long idAvaliacao) {
+        return periodoRepository.findPeriodoByAvaliacao(new Avaliacao(idAvaliacao));
+    }
+
+    @Override
+    public Periodo getLastPeriodo(Long idAvaliacao) {
+        List<Periodo> lista = periodoRepository.findPeriodoByAvaliacao(new Avaliacao(idAvaliacao));
+        if (lista.size() == 0) {
+            return null;
+        } else {
+            return lista.get(lista.size() - 1);
+        }
     }
 
 }

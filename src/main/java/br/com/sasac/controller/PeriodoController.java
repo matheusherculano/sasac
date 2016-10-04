@@ -9,6 +9,7 @@ import br.com.sasac.DTO.DadosGraficoDTO;
 import br.com.sasac.DTO.RespostaDTO;
 import br.com.sasac.model.Periodo;
 import br.com.sasac.service.PeriodoService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
@@ -79,5 +80,12 @@ public class PeriodoController extends CustomController<Periodo, CrudRepository<
          DadosGraficoDTO dto = service.getDadosPeriodos(idAvaliacao);
         
             return new ResponseEntity(dto, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/ultimo",method = RequestMethod.GET)
+    public ResponseEntity getUltimoPeriodo() {
+        Periodo p = service.getLastPeriodo(1L);
+        
+            return new ResponseEntity(p, HttpStatus.OK);
     }
 }

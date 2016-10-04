@@ -68,6 +68,10 @@ public class Avaliacao {
     
     public Avaliacao() {
     }
+    
+    public Avaliacao(Long idAvaliacao) {
+        this.id = idAvaliacao;
+    }
 
     public Avaliacao(AvaliacaoDTO dto) {
         this.id = dto.getId();

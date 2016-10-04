@@ -32,6 +32,8 @@ public class AvaliacaoDTO {
     private String respostaNegativa;
 
     private Repeticao repeticao;
+    
+    private UltimoPeriodoDTO ultimoPeriodo;
 
     public AvaliacaoDTO() {
     }
@@ -57,6 +59,24 @@ public class AvaliacaoDTO {
         this.id = id;
     }
 
+    public String getRespostaPositivia() {
+        return respostaPositivia;
+    }
+
+    public void setRespostaPositivia(String respostaPositivia) {
+        this.respostaPositivia = respostaPositivia;
+    }
+
+    public UltimoPeriodoDTO getUltimoPeriodo() {
+        return ultimoPeriodo;
+    }
+
+    public void setUltimoPeriodo(UltimoPeriodoDTO ultimoPeriodo) {
+        this.ultimoPeriodo = ultimoPeriodo;
+    }
+
+
+    
     
     public String getRespostaPostivia() {
         return respostaPositivia;

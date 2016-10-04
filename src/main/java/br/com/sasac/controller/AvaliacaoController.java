@@ -22,28 +22,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin
 @RequestMapping("/avaliacao")
-public class AvaliacaoController  {
+public class AvaliacaoController {
 
     @Autowired
     private AvaliacaoService avaliacaoService;
-    
+
     @Autowired
     private AvaliacaoRepository avaliacaoRepository;
-    
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity save(@RequestBody AvaliacaoDTO dto) {
         Avaliacao avaliacao = new Avaliacao(dto);
         avaliacaoRepository.save(avaliacao);
-        
-        return new ResponseEntity( HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.OK);
     }
-    
+
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity update(@RequestBody AvaliacaoDTO dto) {
         Avaliacao avaliacao = new Avaliacao(dto);
         avaliacaoRepository.save(avaliacao);
-        
-        return new ResponseEntity( HttpStatus.OK);
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -67,7 +67,7 @@ public class AvaliacaoController  {
     }
 
     @RequestMapping(value = "/publicado", method = RequestMethod.GET)
-    public ResponseEntity getAvaliacoesPublicas(@RequestParam(value = "publicado", required = true) boolean publicado) {
+    public ResponseEntity getAvaliacoesPublicas( @RequestParam(value = "publicado", required = true) boolean publicado)  {
         List<AvaliacaoDTO> dto = avaliacaoService.getAvaliacoesPublicas(publicado);
 
         return new ResponseEntity(dto, HttpStatus.OK);

@@ -50,6 +50,10 @@ public class Usuario {
 
     public Usuario() {
     }
+    
+    public Usuario(Long idUsuario) {
+    this.id = idUsuario;
+    }
 
     public String getNome() {
         return nome;

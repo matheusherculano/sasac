@@ -6,7 +6,9 @@
 package br.com.sasac.service.impl;
 
 import br.com.sasac.DTO.AvaliacaoDTO;
+import br.com.sasac.DTO.UltimoPeriodoDTO;
 import br.com.sasac.model.Avaliacao;
+import br.com.sasac.model.Periodo;
 import br.com.sasac.model.Usuario;
 import br.com.sasac.repository.AvaliacaoRepository;
 import br.com.sasac.service.AvaliacaoService;
@@ -24,6 +26,9 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
 
     @Autowired
     private AvaliacaoRepository avaliacaoRepository;
+
+    @Autowired
+    private PeriodoServiceImpl periodoServiceImpl;
 
     @Override
     public AvaliacaoDTO getAvaliacao(Long id) {
@@ -60,18 +65,18 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
 
     @Override
     public List<AvaliacaoDTO> getAvaliacao() {
-        
-            Iterable<Avaliacao> avaliacaoList = avaliacaoRepository.findAll();
 
-            List<AvaliacaoDTO> lista = new ArrayList<AvaliacaoDTO>();
+        Iterable<Avaliacao> avaliacaoList = avaliacaoRepository.findAll();
 
-            for (Avaliacao item : avaliacaoList) {
-                AvaliacaoDTO dto = new AvaliacaoDTO(item);
+        List<AvaliacaoDTO> lista = new ArrayList<AvaliacaoDTO>();
 
-                lista.add(dto);
-            }
+        for (Avaliacao item : avaliacaoList) {
+            AvaliacaoDTO dto = new AvaliacaoDTO(item);
 
-            return lista;
+            lista.add(dto);
+        }
+
+        return lista;
     }
 
     @Override
@@ -80,8 +85,17 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
         List<AvaliacaoDTO> lista = new ArrayList<AvaliacaoDTO>();
 
         for (Avaliacao item : avaliacoes) {
-            AvaliacaoDTO dto = new AvaliacaoDTO(item);
 
+            AvaliacaoDTO dto = new AvaliacaoDTO(item);
+            
+            Periodo periodo = periodoServiceImpl.getLastPeriodo(item.getId());
+            
+            if(periodo == null){
+                dto.setUltimoPeriodo(null);
+            }else{
+                dto.setUltimoPeriodo(new UltimoPeriodoDTO(periodo.getId()));
+            }
+            
             lista.add(dto);
         }
 
