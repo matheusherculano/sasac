@@ -115,4 +115,10 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
         avaliacaoRepository.save(avaliacao);
     }
 
+    @Override
+    public void criarAvaliacao(Avaliacao avaliacao) {
+        avaliacaoRepository.save(avaliacao);
+        periodoServiceImpl.newPeriodo(avaliacao.getId());
+    }
+
 }

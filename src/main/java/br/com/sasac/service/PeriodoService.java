@@ -18,7 +18,7 @@ public interface PeriodoService {
 
     void addUsuario(RespostaDTO dto);
 
-    boolean getPermissionToAnswer(Long idUsuario);
+    boolean getPermissionToAnswer(RespostaDTO dto);
 
     DadosGraficoDTO getDadosPeriodos(Long idAvaliLong);
 

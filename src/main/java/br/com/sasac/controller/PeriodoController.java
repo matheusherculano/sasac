@@ -57,7 +57,7 @@ public class PeriodoController extends CustomController<Periodo, CrudRepository<
     public ResponseEntity responder(@RequestBody RespostaDTO dto) {
 
         //verificar se o usuário já respondeu esse periodo
-        if (service.getPermissionToAnswer(dto.getIdUsuario())) {
+        if (service.getPermissionToAnswer(dto)) {
 
 //            verificar o tipo da resposta
             if (dto.getResposta().equals("neu") || dto.getResposta().equals("pos") || dto.getResposta().equals("neg")) {

@@ -46,13 +46,13 @@ public class PeriodoServiceImpl implements PeriodoService {
     }
 
     @Override
-    public boolean getPermissionToAnswer(Long idUsuario) {
+    public boolean getPermissionToAnswer(RespostaDTO dto) {
         boolean boo = true;
 
-        Periodo p = periodoRepository.findOne(idUsuario);
+        Periodo p = periodoRepository.findOne(dto.getIdPeriodo());
 
         for (Usuario item : p.getUsuarios()) {
-            if (item.getId().equals(idUsuario)) {
+            if (item.getId().equals(dto.getIdUsuario())) {
                 boo = false;
             }
         }

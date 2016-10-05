@@ -33,7 +33,7 @@ public class AvaliacaoController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity save(@RequestBody AvaliacaoDTO dto) {
         Avaliacao avaliacao = new Avaliacao(dto);
-        avaliacaoRepository.save(avaliacao);
+        avaliacaoService.criarAvaliacao(avaliacao);
 
         return new ResponseEntity(HttpStatus.OK);
     }

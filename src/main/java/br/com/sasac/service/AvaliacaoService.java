@@ -6,7 +6,7 @@
 package br.com.sasac.service;
 
 import br.com.sasac.DTO.AvaliacaoDTO;
-import br.com.sasac.repository.AvaliacaoRepository;
+import br.com.sasac.model.Avaliacao;
 import java.util.List;
 
 /**
@@ -14,15 +14,17 @@ import java.util.List;
  * @author RA21501871
  */
 public interface AvaliacaoService {
+
+    void criarAvaliacao(Avaliacao avaliacao);
     
-    public  AvaliacaoDTO getAvaliacao(Long id);
-    
-    public  List<AvaliacaoDTO> getAvaliacao();
-    
-    public  List<AvaliacaoDTO> getMinhasAvaliacoes(Long id);
-    
-    public  List<AvaliacaoDTO> getAvaliacoesPublicas(boolean boo);
-    
-    public  void setPublicacao(Long idAvaliacao);
+    AvaliacaoDTO getAvaliacao(Long id);
+
+    List<AvaliacaoDTO> getAvaliacao();
+
+    List<AvaliacaoDTO> getMinhasAvaliacoes(Long id);
+
+    List<AvaliacaoDTO> getAvaliacoesPublicas(boolean boo);
+
+    void setPublicacao(Long idAvaliacao);
 
 }
