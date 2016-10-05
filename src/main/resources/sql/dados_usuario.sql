@@ -16,4 +16,16 @@ INSERT INTO sasac.usuario (nome_usuario, perfil_id)
 	VALUES ('Patricia', 3);
 INSERT INTO sasac.usuario (nome_usuario, perfil_id) 
 	VALUES ('Hugo', 3);
+INSERT INTO sasac.repeticao (repeticao) 
+	VALUES ('Semanal');
+INSERT INTO sasac.repeticao (repeticao) 
+	VALUES ('Mensal');
+INSERT INTO sasac.repeticao (repeticao) 
+	VALUES ('Bimestral');
+INSERT INTO sasac.repeticao (repeticao) 
+	VALUES ('Trimestral');
+INSERT INTO sasac.repeticao (repeticao) 
+	VALUES ('Semestral');
+INSERT INTO sasac.repeticao (repeticao) 
+	VALUES ('Anual');
 
