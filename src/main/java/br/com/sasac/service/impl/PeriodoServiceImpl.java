@@ -112,6 +112,7 @@ public class PeriodoServiceImpl implements PeriodoService {
         }
 
         DadosGraficoDTO dto = new DadosGraficoDTO();
+        dto.setRepeticao(a.getRepeticao());
         dto.setTitulo(a.getTitulo());
         dto.setDescricao(a.getDescricao());
         dto.setPeriodos(lista);

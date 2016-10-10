@@ -1,5 +1,6 @@
 package br.com.sasac.DTO;
 
+import br.com.sasac.model.Repeticao;
 import java.util.List;
 
 /**
@@ -10,6 +11,7 @@ public class DadosGraficoDTO {
     
     private String titulo;
     private String descricao;
+    private Repeticao repeticao;
     private List<DadosPeriodosDTO> periodos;
 
     public DadosGraficoDTO() {
@@ -19,6 +21,15 @@ public class DadosGraficoDTO {
         return titulo;
     }
 
+    public Repeticao getRepeticao() {
+        return repeticao;
+    }
+
+    public void setRepeticao(Repeticao repeticao) {
+        this.repeticao = repeticao;
+    }
+
+    
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }

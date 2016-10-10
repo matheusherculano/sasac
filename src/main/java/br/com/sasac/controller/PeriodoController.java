@@ -62,7 +62,7 @@ public class PeriodoController extends CustomController<Periodo, CrudRepository<
     }
     
     
-    @RequestMapping(value = "/grafico/{idAvaliacao}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{idAvaliacao}/grafico",method = RequestMethod.GET)
     public ResponseEntity getGrafico(@PathVariable Long idAvaliacao) {
         
          DadosGraficoDTO dto = service.getDadosPeriodos(idAvaliacao);
