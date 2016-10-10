@@ -41,18 +41,6 @@ public class PeriodoController extends CustomController<Periodo, CrudRepository<
         return new ResponseEntity(HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/teste",method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity teste(@RequestBody RespostaDTO dto) {
-//        service.newPeriodo(idAvaliacao);
-
-        System.out.println("Respostas "+dto.getResposta());
-        System.out.println("getIdPeriodo "+dto.getIdPeriodo());
-        System.out.println("getResposta "+dto.getResposta());
-        
-        return new ResponseEntity(HttpStatus.OK);
-    }
-    
     @RequestMapping(path = "/resposta", method = RequestMethod.POST)
     public ResponseEntity responder(@RequestBody RespostaDTO dto) {
 
