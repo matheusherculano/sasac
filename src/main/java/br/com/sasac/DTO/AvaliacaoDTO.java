@@ -34,6 +34,16 @@ public class AvaliacaoDTO {
     private Repeticao repeticao;
     
     private UltimoPeriodoDTO ultimoPeriodo;
+    
+    private List<DadosPeriodosDTO> periodos;
+
+    public List<DadosPeriodosDTO> getPeriodos() {
+        return periodos;
+    }
+
+    public void setPeriodos(List<DadosPeriodosDTO> periodos) {
+        this.periodos = periodos;
+    }
 
     public AvaliacaoDTO() {
     }

@@ -6,6 +6,7 @@
 package br.com.sasac.service.impl;
 
 import br.com.sasac.DTO.AvaliacaoDTO;
+import br.com.sasac.DTO.DadosPeriodosDTO;
 import br.com.sasac.DTO.UltimoPeriodoDTO;
 import br.com.sasac.model.Avaliacao;
 import br.com.sasac.model.Periodo;
@@ -72,7 +73,21 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
 
         for (Avaliacao item : avaliacaoList) {
             AvaliacaoDTO dto = new AvaliacaoDTO(item);
-
+            
+            List<DadosPeriodosDTO> listaPeriodos = new ArrayList<DadosPeriodosDTO>();
+            
+            for(Periodo periodo : item.getPeriodo()){
+               DadosPeriodosDTO dadosPeriodo = new DadosPeriodosDTO();
+               
+               dadosPeriodo.setId(periodo.getId());
+               dadosPeriodo.setRespostasNegativas(periodo.getRespostasNegativas());
+               dadosPeriodo.setRespostasNeutras(periodo.getRespostasNeutras());
+               dadosPeriodo.setRespostasPositivas(periodo.getRespostasPositivas());
+               
+               listaPeriodos.add(dadosPeriodo);
+            }
+            
+            dto.setPeriodos(listaPeriodos);
             lista.add(dto);
         }
 
