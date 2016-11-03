@@ -135,4 +135,9 @@ public class PeriodoServiceImpl implements PeriodoService {
         }
     }
 
+    @Override
+    public void deletar(Long idPeriodo) {
+        periodoRepository.delete(idPeriodo);
+    }
+
 }

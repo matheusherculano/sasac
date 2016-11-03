@@ -27,4 +27,6 @@ public interface PeriodoService {
     List<Periodo> getPeriodoPorAvaliacao(Long idAvaliacao);
     
     Periodo getLastPeriodo(Long idAvaliacao);
+    
+    void deletar(Long idPeriodo);
 }

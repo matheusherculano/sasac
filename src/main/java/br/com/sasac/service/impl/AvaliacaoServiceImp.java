@@ -8,6 +8,7 @@ package br.com.sasac.service.impl;
 import br.com.sasac.DTO.AvaliacaoDTO;
 import br.com.sasac.DTO.DadosPeriodosDTO;
 import br.com.sasac.DTO.UltimoPeriodoDTO;
+import br.com.sasac.controller.PeriodoController;
 import br.com.sasac.model.Avaliacao;
 import br.com.sasac.model.Periodo;
 import br.com.sasac.model.Usuario;
@@ -144,8 +145,9 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
     public void delete(Long idAvaliacao) {
         Avaliacao avaliacao = avaliacaoRepository.findOne(idAvaliacao);
         
+        
         for (Periodo periodo : avaliacao.getPeriodo()) {
-            periodoRespository.delete(periodo.getId());
+           periodoServiceImpl.deletar(periodo.getId());
         }
         
 //        avaliacaoRepository.delete(new Avaliacao(idAvaliacao));
