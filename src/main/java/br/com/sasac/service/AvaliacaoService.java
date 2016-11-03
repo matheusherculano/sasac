@@ -26,5 +26,7 @@ public interface AvaliacaoService {
     List<AvaliacaoDTO> getAvaliacoesPublicas(boolean boo);
 
     void setPublicacao(Long idAvaliacao);
+    
+    void delete(Long idAvaliacao);
 
 }

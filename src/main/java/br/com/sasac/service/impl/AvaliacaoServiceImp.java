@@ -12,6 +12,7 @@ import br.com.sasac.model.Avaliacao;
 import br.com.sasac.model.Periodo;
 import br.com.sasac.model.Usuario;
 import br.com.sasac.repository.AvaliacaoRepository;
+import br.com.sasac.repository.PeriodoRepository;
 import br.com.sasac.service.AvaliacaoService;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,116 +25,131 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AvaliacaoServiceImp implements AvaliacaoService {
-
+    
     @Autowired
     private AvaliacaoRepository avaliacaoRepository;
-
+    
     @Autowired
     private PeriodoServiceImpl periodoServiceImpl;
-
+    
+    @Autowired
+    private PeriodoRepository periodoRespository;
+    
     @Override
     public AvaliacaoDTO getAvaliacao(Long id) {
         Avaliacao a = avaliacaoRepository.findOne(id);
         AvaliacaoDTO dto = new AvaliacaoDTO(a);
-
+        
         return dto;
     }
-
+    
     @Override
     public List<AvaliacaoDTO> getMinhasAvaliacoes(Long id) {
         Usuario usuario = new Usuario();
         usuario.setId(id);
-
+        
         List<Avaliacao> avaliacaoList = avaliacaoRepository.findByUsuarioCriador(usuario);
-
+        
         List<AvaliacaoDTO> lista = new ArrayList<AvaliacaoDTO>();
-
+        
         for (Avaliacao item : avaliacaoList) {
             AvaliacaoDTO dto = new AvaliacaoDTO();
-
+            
             dto.setId(item.getId());
             dto.setTitulo(item.getTitulo());
             dto.setDescricao(item.getDescricao());
             dto.setPublicado(item.isPublicado());
             dto.setDt_disponibilidade(item.getDt_disponibilidade());
             dto.setUsuarioCriador(item.getUsuarioCriador());
-
+            
             lista.add(dto);
         }
-
+        
         return lista;
     }
-
+    
     @Override
     public List<AvaliacaoDTO> getAvaliacao() {
-
+        
         Iterable<Avaliacao> avaliacaoList = avaliacaoRepository.findAll();
-
+        
         List<AvaliacaoDTO> lista = new ArrayList<AvaliacaoDTO>();
-
+        
         for (Avaliacao item : avaliacaoList) {
             AvaliacaoDTO dto = new AvaliacaoDTO(item);
             
             List<DadosPeriodosDTO> listaPeriodos = new ArrayList<DadosPeriodosDTO>();
             
-            for(Periodo periodo : item.getPeriodo()){
-               DadosPeriodosDTO dadosPeriodo = new DadosPeriodosDTO();
-               
-               dadosPeriodo.setId(periodo.getId());
-               dadosPeriodo.setRespostasNegativas(periodo.getRespostasNegativas());
-               dadosPeriodo.setRespostasNeutras(periodo.getRespostasNeutras());
-               dadosPeriodo.setRespostasPositivas(periodo.getRespostasPositivas());
-               
-               listaPeriodos.add(dadosPeriodo);
+            for (Periodo periodo : item.getPeriodo()) {
+                DadosPeriodosDTO dadosPeriodo = new DadosPeriodosDTO();
+                
+                dadosPeriodo.setId(periodo.getId());
+                dadosPeriodo.setRespostasNegativas(periodo.getRespostasNegativas());
+                dadosPeriodo.setRespostasNeutras(periodo.getRespostasNeutras());
+                dadosPeriodo.setRespostasPositivas(periodo.getRespostasPositivas());
+                
+                listaPeriodos.add(dadosPeriodo);
             }
             
             dto.setPeriodos(listaPeriodos);
             lista.add(dto);
         }
-
+        
         return lista;
     }
-
+    
     @Override
     public List<AvaliacaoDTO> getAvaliacoesPublicas(boolean publicado) {
         List<Avaliacao> avaliacoes = avaliacaoRepository.findByPublicado(publicado);
         List<AvaliacaoDTO> lista = new ArrayList<AvaliacaoDTO>();
-
+        
         for (Avaliacao item : avaliacoes) {
-
+            
             AvaliacaoDTO dto = new AvaliacaoDTO(item);
             
             Periodo periodo = periodoServiceImpl.getLastPeriodo(item.getId());
             
-            if(periodo == null){
+            if (periodo == null) {
                 dto.setUltimoPeriodo(null);
-            }else{
+            } else {
                 dto.setUltimoPeriodo(new UltimoPeriodoDTO(periodo.getId()));
             }
             
             lista.add(dto);
         }
-
+        
         return lista;
     }
-
+    
     @Override
     public void setPublicacao(Long idAvaliacao) {
         Avaliacao avaliacao = avaliacaoRepository.findOne(idAvaliacao);
-
+        
         if (avaliacao.isPublicado()) {
             avaliacao.setPublicado(false);
         } else {
             avaliacao.setPublicado(true);
         }
-
+        
         avaliacaoRepository.save(avaliacao);
     }
-
+    
     @Override
     public void criarAvaliacao(Avaliacao avaliacao) {
         avaliacaoRepository.save(avaliacao);
         periodoServiceImpl.newPeriodo(avaliacao.getId());
     }
+    
+    @Override
+    public void delete(Long idAvaliacao) {
+        Avaliacao avaliacao = avaliacaoRepository.findOne(idAvaliacao);
+        
+        for (Periodo periodo : avaliacao.getPeriodo()) {
+            periodoRespository.delete(periodo.getId());
+        }
+        
+//        avaliacaoRepository.delete(new Avaliacao(idAvaliacao));
 
+    }
+    
 }
