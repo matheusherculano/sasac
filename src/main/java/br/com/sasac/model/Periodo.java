@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,7 +42,7 @@ public class Periodo {
     @JsonBackReference
     private Avaliacao avaliacao;
 
-    @ManyToMany(mappedBy = "periodo", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "periodo", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JsonManagedReference
     private List<Usuario> usuarios;
 

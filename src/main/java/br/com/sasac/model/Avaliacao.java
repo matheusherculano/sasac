@@ -36,7 +36,7 @@ public class Avaliacao {
     private Usuario usuarioCriador;
     
     
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="avaliacao", fetch = FetchType.LAZY)
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="avaliacao", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Periodo> periodo;
      
      @ManyToOne(optional = true)
