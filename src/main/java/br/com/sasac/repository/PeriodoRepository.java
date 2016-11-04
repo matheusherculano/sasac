@@ -9,6 +9,7 @@ import br.com.sasac.model.Avaliacao;
 import br.com.sasac.model.Periodo;
 import br.com.sasac.model.Usuario;
 import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,8 +20,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PeriodoRepository extends CrudRepository<Periodo, Long> {
 
-        List<Periodo> findPeriodoByAvaliacao(Avaliacao avaliacao);
-        
-        List<Periodo> findPeriodoByUsuarios(Usuario usuario);
-        
+    List<Periodo> findPeriodoByAvaliacao(Avaliacao avaliacao);
+
+    List<Periodo> findPeriodoByUsuarios(Usuario usuario);
+
+
 }
