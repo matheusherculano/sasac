@@ -80,7 +80,7 @@ public class AvaliacaoController {
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
     
-    @RequestMapping(value = "/{idAvaliacao}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{idAvaliacao}", method = RequestMethod.POST)
     public ResponseEntity deletar(@PathVariable Long idAvaliacao) {
         avaliacaoService.delete(idAvaliacao);
 

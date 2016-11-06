@@ -147,23 +147,25 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
     }
 
     @Override
-    public void delete(Long idAvaliacao){
+    public void delete(Long idAvaliacao) {
 
         Connection cn = null;
         try {
-            
+            Avaliacao avaliacao = avaliacaoRepository.findOne(idAvaliacao);
+
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Driver carregado!!!");
             cn = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3307/mysql",
                     "root", "usbw");
-            System.out.println("Conexão efetuada com sucesso!!!");
+
+            for (Periodo periodo : avaliacao.getPeriodo()) {
+                PreparedStatement stmt = cn.prepareStatement("delete from sasac.usuario_periodo where periodo_id = ?");
+                stmt.setLong(1, periodo.getId());
+                stmt.execute();
+            }
             
-            
-            PreparedStatement stmt = cn.prepareStatement("delete from sasac.usuario_periodo where periodo_id = ?");
-            stmt.setInt(1, 1);
-            stmt.execute(); 
-            
+            avaliacaoRepository.delete(idAvaliacao);
+
         } catch (ClassNotFoundException e) {
             System.out.println("Driver não encontrado");
         } catch (SQLException ex) {
