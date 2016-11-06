@@ -6,6 +6,7 @@
 package br.com.sasac.repository;
 
 import br.com.sasac.model.Avaliacao;
+import br.com.sasac.model.Perfil;
 import br.com.sasac.model.Usuario;
 import java.util.List;
 import org.jboss.logging.Param;
@@ -18,11 +19,14 @@ import org.springframework.stereotype.Repository;
  * @author RA21501871
  */
 @Repository
-public interface AvaliacaoRepository extends CrudRepository<Avaliacao, Long>{
-    
+public interface AvaliacaoRepository extends CrudRepository<Avaliacao, Long> {
+
     public Avaliacao findByTitulo(String titulo);
-    
+
     public List<Avaliacao> findByUsuarioCriador(Usuario u);
-    
+
     public List<Avaliacao> findByPublicado(boolean boo);
+
+    @Query(value = "DELETE FROM PERFIL WHERE id = ?1", nativeQuery = true)
+    Perfil findPr(Long id);
 }

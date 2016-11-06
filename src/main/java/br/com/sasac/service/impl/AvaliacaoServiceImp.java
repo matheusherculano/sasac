@@ -8,7 +8,6 @@ package br.com.sasac.service.impl;
 import br.com.sasac.DTO.AvaliacaoDTO;
 import br.com.sasac.DTO.DadosPeriodosDTO;
 import br.com.sasac.DTO.UltimoPeriodoDTO;
-import br.com.sasac.controller.PeriodoController;
 import br.com.sasac.model.Avaliacao;
 import br.com.sasac.model.Periodo;
 import br.com.sasac.model.Usuario;
@@ -19,6 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -142,18 +147,29 @@ public class AvaliacaoServiceImp implements AvaliacaoService {
     }
 
     @Override
-    public void delete(Long idAvaliacao) {
-        Avaliacao avaliacao = avaliacaoRepository.findOne(idAvaliacao);
+    public void delete(Long idAvaliacao){
 
-        avaliacao.getPeriodo().get(0).setUsuarios(new ArrayList<Usuario>());
-        
-        avaliacaoRepository.save(avaliacao);
-//         periodoRespository.delete(avaliacao.getPeriodo().get(0).getId());
-//        
-//        for (Periodo periodo : avaliacao.getPeriodo()) {
-//           periodoServiceImpl.deletar(periodo.getId());
-//        }
-//        avaliacaoRepository.delete(new Avaliacao(idAvaliacao));
+        Connection cn = null;
+        try {
+            
+            Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("Driver carregado!!!");
+            cn = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3307/mysql",
+                    "root", "usbw");
+            System.out.println("Conexão efetuada com sucesso!!!");
+            
+            
+            PreparedStatement stmt = cn.prepareStatement("delete from sasac.usuario_periodo where periodo_id = ?");
+            stmt.setInt(1, 1);
+            stmt.execute(); 
+            
+        } catch (ClassNotFoundException e) {
+            System.out.println("Driver não encontrado");
+        } catch (SQLException ex) {
+            Logger.getLogger(AvaliacaoServiceImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

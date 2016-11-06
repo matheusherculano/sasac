@@ -7,6 +7,7 @@ package br.com.sasac.service;
 
 import br.com.sasac.DTO.AvaliacaoDTO;
 import br.com.sasac.model.Avaliacao;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
